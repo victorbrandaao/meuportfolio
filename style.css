@@ -10,6 +10,21 @@
     --christmas-green: #2ecc71;
     --christmas-gold: #ffd700;
     --snow-color: #ffffff;
+    
+    /* Cores Modo Claro */
+    --primary-color: #5A67D8;
+    --bg-color: #f7fafc;
+    --text-color: #2d3748;
+    --christmas-red: #ff1a1a;
+    --christmas-green: #2ecc71;
+    --christmas-gold: #ffd700;
+    
+    /* Cores Modo Escuro */
+    --dark-bg: #1a202c;
+    --dark-text: #e2e8f0;
+    --dark-christmas-red: #b91c1c;
+    --dark-christmas-green: #166534;
+    --dark-christmas-gold: #b7791f;
 }
 
 /* Reset básico */
@@ -244,6 +259,24 @@ section:hover {
     .project-card {
         background: #2d3748;
     }
+    
+    body {
+        background-color: var(--dark-bg);
+        color: var(--dark-text);
+    }
+
+    .santa-sleigh { filter: brightness(0.8) saturate(1.2); }
+    .christmas-tree { filter: brightness(0.8) saturate(1.2); }
+    .led { filter: brightness(0.8); }
+    
+    nav {
+        background: rgba(26, 32, 44, 0.95) !important;
+    }
+    
+    .project-card {
+        background: linear-gradient(145deg, #2d3748, #1a202c);
+        border-color: var(--dark-christmas-gold);
+    }
 }
 
 /* Efeitos Natalinos */
@@ -338,10 +371,11 @@ h2 {
     top: 50px;
     right: -150px;
     font-size: 60px;
-    z-index: 1000;
+    z-index: 9999;
     transition: right 10s linear;
     filter: drop-shadow(0 0 20px rgba(255,0,0,0.5));
     transform: scaleX(-1);
+    pointer-events: none;
 }
 
 /* Luzes LED */
@@ -353,7 +387,9 @@ h2 {
     display: flex;
     justify-content: space-around;
     padding: 10px;
-    z-index: 999;
+    z-index: 9998;
+    height: 20px;
+    pointer-events: none;
 }
 
 .led {
@@ -362,6 +398,7 @@ h2 {
     border-radius: 50%;
     background: red;
     animation: ledBlink 1s infinite;
+    filter: brightness(0.8);
 }
 
 .led:nth-child(2n) {
@@ -375,20 +412,22 @@ h2 {
 }
 
 @keyframes ledBlink {
-    0%, 100% { opacity: 1; transform: scale(1); filter: brightness(1); }
-    50% { opacity: 0.5; transform: scale(1.2); filter: brightness(1.5); }
+    0%, 100% { opacity: 0.8; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.3); }
 }
 
 /* Árvore de Natal Interativa */
 .christmas-tree {
     position: fixed;
     bottom: 20px;
-    left: 20px;
+    left: 40px;
     font-size: 100px;
-    z-index: 998;
+    z-index: 9997;
     cursor: pointer;
     transition: all 0.3s ease;
     animation: treeGlow 2s infinite;
+    opacity: 0.9;
+    filter: brightness(0.8) saturate(1.2);
 }
 
 .christmas-tree:hover {
@@ -404,9 +443,10 @@ h2 {
 /* Presentes Flutuantes */
 .presents {
     position: fixed;
-    bottom: 40px;
-    right: 40px;
-    z-index: 997;
+    bottom: 60px;
+    right: 60px;
+    z-index: 9996;
+    opacity: 0.9;
 }
 
 .present {
@@ -425,8 +465,14 @@ h2 {
 }
 
 @keyframes float {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(10deg); }
+    0%, 100% { 
+        transform: translateY(0) rotate(0deg); 
+        filter: brightness(1);
+    }
+    50% { 
+        transform: translateY(-20px) rotate(10deg); 
+        filter: brightness(1.2);
+    }
 }
 
 /* Efeito de Neve Melhorado */
@@ -461,4 +507,21 @@ nav a::before, button::before {
 @keyframes shine {
     0% { transform: translateX(-100%) rotate(45deg); }
     100% { transform: translateX(100%) rotate(45deg); }
+}
+
+/* Controles de Sobreposição */
+.christmas-decoration {
+    pointer-events: none;
+    user-select: none;
+}
+
+/* Ajuste de Performance */
+@media (prefers-reduced-motion: reduce) {
+    .santa-sleigh,
+    .presents,
+    .christmas-tree,
+    .led {
+        animation: none !important;
+        transition: none !important;
+    }
 }
