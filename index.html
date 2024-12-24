@@ -21,8 +21,12 @@
 
 <body class="bg-gray-100 text-gray-800 font-sans leading-relaxed tracking-wide">
 
+    <div class="christmas-lights christmas-lights-top"></div>
     <div class="christmas-ornament christmas-ornament-1">🎄</div>
     <div class="christmas-ornament christmas-ornament-2">🎅</div>
+    <div class="christmas-ornament christmas-ornament-3">🎁</div>
+    <div class="christmas-ornament christmas-ornament-4">⛄</div>
+    <div class="christmas-lights christmas-lights-bottom"></div>
 
     <!-- Navbar - Ajustes no menu mobile -->
     <nav class="fixed w-full bg-white shadow-md z-10">
@@ -91,7 +95,7 @@
             <div class="mt-6 grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 <!-- App Tranquilamente -->
                 <div
-                    class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 animate__animated animate__fadeInUp">
+                    class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 animate__animated animate__fadeInUp project-card">
                     <h3 class="text-2xl font-bold text-indigo-600">App Tranquilamente</h3>
                     <p class="text-gray-600 mt-4">Aplicativo desenvolvido com Swift e SQLite para ajudar usuários a
                         monitorar e reduzir o consumo de cigarros, promovendo um estilo de vida mais saudável.</p>
@@ -111,7 +115,7 @@
 
                 <!-- Página para uma empresa -->
                 <div
-                    class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 animate__animated animate__fadeInUp">
+                    class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 animate__animated animate__fadeInUp project-card">
                     <h3 class="text-2xl font-bold text-indigo-600">Página para uma empresa</h3>
                     <p class="text-gray-600 mt-4">Desenvolvimento de frontend utilizando HTML, CSS e JavaScript, com
                         foco em design responsivo e intuitivo.</p>
@@ -132,7 +136,7 @@
 
                 <!-- Portfolio_Novo -->
                 <div
-                    class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 animate__animated animate__fadeInUp">
+                    class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 animate__animated animate__fadeInUp project-card">
                     <h3 class="text-2xl font-bold text-indigo-600">Portfolio_Novo</h3>
                     <p class="text-gray-600 mt-4">Criação de um portfólio minimalista empregando HTML, CSS e Tailwind
                         CSS para exibição de habilidades e projetos.</p>
@@ -153,7 +157,7 @@
 
                 <!-- Gerador de Senhas -->
                 <div
-                    class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 animate__animated animate__fadeInUp">
+                    class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 animate__animated animate__fadeInUp project-card">
                     <h3 class="text-2xl font-bold text-indigo-600">Gerador de Senhas</h3>
                     <p class="text-gray-600 mt-4">Script em Python para geração de senhas seguras com opções
                         personalizáveis de complexidade.</p>
@@ -172,7 +176,7 @@
 
                 <!-- MIRELLA55 -->
                 <div
-                    class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 animate__animated animate__fadeInUp">
+                    class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 animate__animated animate__fadeInUp project-card">
                     <h3 class="text-2xl font-bold text-indigo-600">MIRELLA55</h3>
                     <p class="text-gray-600 mt-4">Desenvolvimento de campanha política com HTML, CSS e JavaScript,
                         focando em UI/UX e responsividade.</p>
@@ -298,6 +302,30 @@
             count: 50,
             minSize: 2,
             maxSize: 5
+        });
+    </script>
+    <script>
+        // Neve mais densa
+        var snowflakes = new Snowflakes({
+            color: '#ffffff',
+            count: 100,
+            minSize: 2,
+            maxSize: 8,
+            speed: 1.5,
+            rotation: true,
+            wind: true
+        });
+
+        // Efeito de brilho nos cards
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
         });
     </script>
 </body>
