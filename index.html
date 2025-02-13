@@ -3,25 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Victor Brandão | Full-Stack Engineer</title>
-    <meta name="description" content="Engenheiro de Software Full-Stack especializado em soluções backend e integrações complexas">
+    <title>Victor Brandão | Software Engineer</title>
+    <meta name="description" content="Software Engineer na Dell Technologies | C# | .NET | Backend">
     <meta property="og:image" content="https://github.com/victorbrandaao.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg: #f8f9fa;
-            --text: #1a1e21;
-            --primary: #2b2d42;
-            --accent: #3a86ff;
-            --card-bg: #ffffff;
+            --bg: #ffffff;
+            --text: #111111;
+            --accent: #0066cc;
+            --subtle: #666666;
+            --border: #e0e0e0;
         }
 
         @media (prefers-color-scheme: dark) {
             :root {
-                --bg: #1a1e21;
-                --text: #e9ecef;
-                --primary: #adb5bd;
-                --card-bg: #2b2d42;
+                --bg: #111111;
+                --text: #ffffff;
+                --accent: #3b82f6;
+                --subtle: #999999;
+                --border: #333333;
             }
         }
 
@@ -29,7 +31,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'IBM Plex Mono', monospace;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         body {
@@ -37,237 +39,204 @@
             color: var(--text);
             line-height: 1.6;
             padding: 2rem;
+            transition: background-color 0.3s ease;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 860px;
             margin: 0 auto;
         }
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 4rem;
-            padding: 1rem 0;
-            border-bottom: 2px solid var(--primary);
-        }
-
-        .status {
-            font-size: 0.9rem;
-            padding: 0.3rem 0.7rem;
-            background: var(--primary);
-            color: var(--bg);
-            border-radius: 20px;
-        }
-
-        .main-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 4rem;
-            margin-bottom: 4rem;
-        }
-
-        .hero-text {
-            font-size: 3.5rem;
-            line-height: 1.1;
-            margin-bottom: 2rem;
-        }
-
-        .tech-stack {
-            display: grid;
-            gap: 1.5rem;
-            padding: 2rem;
-            background: var(--card-bg);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .stack-item {
+        .profile {
             display: flex;
             align-items: center;
-            gap: 1rem;
-        }
-
-        .stack-icon {
-            font-size: 1.5rem;
-            width: 40px;
-            text-align: center;
-        }
-
-        .projects-grid {
-            display: grid;
             gap: 2rem;
-            margin-top: 4rem;
+            margin-bottom: 4rem;
         }
 
-        .project-card {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
         }
 
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        .profile-info h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
         }
 
-        .project-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .profile-info .role {
+            color: var(--subtle);
+            font-size: 1.1rem;
             margin-bottom: 1rem;
         }
 
-        .project-stats {
+        .social-links {
             display: flex;
             gap: 1rem;
-            font-size: 0.9rem;
-            opacity: 0.8;
+        }
+
+        .social-links a {
+            color: var(--text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--border);
+        }
+
+        .section {
+            margin: 4rem 0;
+        }
+
+        .section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .tech-card {
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+
+        .tech-card i {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .tech-card h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-item {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .experience-item:last-child {
+            border-bottom: none;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .company {
+            font-weight: 500;
+            color: var(--accent);
+        }
+
+        .period {
+            color: var(--subtle);
         }
 
         footer {
-            text-align: center;
             margin-top: 6rem;
-            padding: 2rem;
-            border-top: 2px solid var(--primary);
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--subtle);
         }
 
         @media (max-width: 768px) {
-            .main-grid {
+            .profile {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .tech-grid {
                 grid-template-columns: 1fr;
             }
-            
-            .hero-text {
-                font-size: 2.5rem;
+
+            .experience-header {
+                flex-direction: column;
+                gap: 0.5rem;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <nav>
-            <div class="logo">VB</div>
-            <div class="status" id="status">🟡 Carregando status...</div>
-        </nav>
-
-        <div class="main-grid">
-            <div>
-                <h1 class="hero-text">
-                    Arquitetura de Sistemas &<br>
-                    Integrações Complexas
-                </h1>
-                
-                <div class="tech-stack">
-                    <div class="stack-item">
-                        <i class="stack-icon fa-brands fa-microsoft"></i>
-                        <div>
-                            <h3>C#/.NET Ecosystem</h3>
-                            <p>APIs REST, Entity Framework, ASP.NET Core</p>
-                        </div>
-                    </div>
-                    <div class="stack-item">
-                        <i class="stack-icon fa-solid fa-database"></i>
-                        <div>
-                            <h3>PostgreSQL</h3>
-                            <p>Otimização de queries, stored procedures, particionamento</p>
-                        </div>
-                    </div>
-                    <div class="stack-item">
-                        <i class="stack-icon fa-solid fa-plug"></i>
-                        <div>
-                            <h3>n8n + Supabase</h3>
-                            <p>Automação de workflows, pipelines ETL, integrações SaaS</p>
-                        </div>
-                    </div>
-                    <div class="stack-item">
-                        <i class="stack-icon fa-solid fa-robot"></i>
-                        <div>
-                            <h3>Super Agents</h3>
-                            <p>Automações inteligentes, processamento assíncrono</p>
-                        </div>
-                    </div>
+        <section class="profile">
+            <img src="https://github.com/victorbrandaao.png" alt="Victor Brandão" class="profile-image">
+            <div class="profile-info">
+                <h1>Victor Brandão</h1>
+                <div class="role">Software Engineer na Dell Technologies</div>
+                <div class="social-links">
+                    <a href="https://github.com/victorbrandaao" target="_blank">
+                        <i class="fab fa-github"></i>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="https://linkedin.com/in/victorbrandaao" target="_blank">
+                        <i class="fab fa-linkedin"></i>
+                        <span>LinkedIn</span>
+                    </a>
                 </div>
             </div>
+        </section>
 
-            <div class="projects">
-                <h2>Projetos Recentes</h2>
-                <div id="projects-container" class="projects-grid"></div>
+        <section class="section">
+            <h2>Tecnologias</h2>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <i class="fas fa-code"></i>
+                    <h3>Backend Development</h3>
+                    <p>C#, .NET Core, ASP.NET Core, Entity Framework</p>
+                </div>
+                <div class="tech-card">
+                    <i class="fas fa-database"></i>
+                    <h3>Bancos de Dados</h3>
+                    <p>SQL Server, PostgreSQL, MongoDB</p>
+                </div>
+                <div class="tech-card">
+                    <i class="fas fa-cloud"></i>
+                    <h3>Cloud & DevOps</h3>
+                    <p>Azure, Docker, CI/CD, Git</p>
+                </div>
             </div>
-        </div>
+        </section>
+
+        <section class="section">
+            <h2>Experiência</h2>
+            <div class="experience-item">
+                <div class="experience-header">
+                    <span class="company">Dell Technologies</span>
+                    <span class="period">2023 - Presente</span>
+                </div>
+                <h3>Software Engineer</h3>
+                <p>Desenvolvimento de soluções backend e microsserviços utilizando .NET Core e Azure.</p>
+            </div>
+        </section>
 
         <footer>
-            <p>© 2023 Victor Brandão<br>
-            <a href="https://linkedin.com/in/victorbrandaao" target="_blank">LinkedIn</a> | 
-            <a href="https://github.com/victorbrandaao" target="_blank">GitHub</a></p>
+            <p>© 2024 Victor Brandão</p>
         </footer>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            // Status de Atividade do GitHub
-            const updateStatus = async () => {
-                try {
-                    const res = await fetch('https://api.github.com/users/victorbrandaao/events');
-                    const data = await res.json();
-                    const statusElement = document.getElementById('status');
-                    
-                    const lastActivity = data[0]?.created_at;
-                    const isActive = new Date() - new Date(lastActivity) < 86400000; // 24h
-                    
-                    statusElement.innerHTML = isActive 
-                        ? '🟢 Ativo agora' 
-                        : '🟡 Inativo nas últimas 24h';
-                } catch (error) {
-                    console.error('Erro ao atualizar status:', error);
-                }
-            };
-
-            // Carregar Projetos
-            const loadProjects = async () => {
-                try {
-                    const response = await fetch('https://api.github.com/users/victorbrandaao/repos?sort=updated');
-                    const projects = await response.json();
-                    const container = document.getElementById('projects-container');
-                    
-                    const filteredProjects = projects.filter(p => 
-                        !p.fork && p.description && 
-                        (p.language === 'C#' || p.topics.includes('backend'))
-                    ).slice(0, 4).map(project => `
-                        <div class="project-card">
-                            <div class="project-header">
-                                <h3>${project.name}</h3>
-                                <div class="project-stats">
-                                    <span><i class="fas fa-code"></i> ${project.language || 'Backend'}</span>
-                                    <span><i class="fas fa-star"></i> ${project.stargazers_count}</span>
-                                </div>
-                            </div>
-                            <p>${project.description}</p>
-                            ${project.homepage ? `<a href="${project.homepage}" target="_blank">Demo</a>` : ''}
-                            <a href="${project.html_url}" target="_blank" class="code-link">
-                                Ver Código <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    `).join('');
-                    
-                    container.innerHTML = filteredProjects;
-                } catch (error) {
-                    console.error('Erro ao carregar projetos:', error);
-                    container.innerHTML = '<p>Projetos temporariamente indisponíveis</p>';
-                }
-            };
-
-            // Inicialização
-            updateStatus();
-            loadProjects();
-            setInterval(updateStatus, 600000); // Atualiza a cada 10 minutos
-
-            // Dark Mode Smooth Transition
-            const root = document.documentElement;
-            root.style.transition = 'background 0.3s ease, color 0.3s ease';
-        });
-    </script>
 </body>
 </html>
