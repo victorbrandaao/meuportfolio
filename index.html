@@ -4,30 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Victor Brandão | Software Engineer</title>
-    <meta name="description" content="Software Engineer na Dell Technologies | C# | .NET | Backend">
+    <meta name="description" content="Software Engineer | C# | .NET | Backend">
     <meta name="keywords" content="Victor Brandão, Software Engineer, C#, .NET, Backend, Dell Technologies">
     <meta property="og:image" content="https://github.com/victorbrandaao.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg: #ffffff;
-            --text: #111111;
-            --accent: #0066cc;
-            --subtle: #666666;
-            --border: #e0e0e0;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            --bg: #f0f4f8;
+            --text: #1e2a44;
+            --accent: #ff6b6b;
+            --subtle: #64748b;
+            --border: #d1d9e6;
+            --card-bg: #ffffff;
+            --shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            --hover-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
         }
 
         @media (prefers-color-scheme: dark) {
             :root {
-                --bg: #1a1a1a;
-                --text: #ffffff;
-                --accent: #3b82f6;
-                --subtle: #999999;
-                --border: #444444;
-                --shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+                --bg: #1e2a44;
+                --text: #e2e8f0;
+                --accent: #ff8787;
+                --subtle: #94a3b8;
+                --border: #334155;
+                --card-bg: #2d3748;
+                --shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+                --hover-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
             }
         }
 
@@ -35,190 +39,265 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
 
         body {
             background: var(--bg);
             color: var(--text);
-            line-height: 1.6;
-            padding: 3rem;
+            line-height: 1.7;
+            padding: 4rem 2rem;
+            overflow-x: hidden;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1100px;
             margin: 0 auto;
+            padding: 0 1rem;
         }
 
         .profile {
             display: flex;
             align-items: center;
-            gap: 2.5rem;
-            margin-bottom: 5rem;
-            background: var(--bg);
-            padding: 2rem;
-            border-radius: 12px;
+            gap: 3rem;
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 20px;
             box-shadow: var(--shadow);
+            margin-bottom: 6rem;
+            animation: slideInLeft 0.8s ease-out;
         }
 
         .profile-image {
-            width: 140px;
-            height: 140px;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
+            border: 5px solid var(--accent);
             object-fit: cover;
-            border: 3px solid var(--accent);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .profile-image:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
         }
 
         .profile-info h1 {
-            font-size: 2.8rem;
-            font-weight: 600;
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--accent), var(--text));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             margin-bottom: 0.5rem;
-            line-height: 1.2;
         }
 
         .profile-info .role {
+            font-size: 1.3rem;
             color: var(--subtle);
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
         }
 
         .social-links {
             display: flex;
-            gap: 1rem;
+            gap: 1.2rem;
+            flex-wrap: wrap;
         }
 
         .social-links a {
-            color: var(--text);
-            text-decoration: none;
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.75rem 1.25rem;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+            padding: 0.8rem 1.6rem;
+            background: var(--card-bg);
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 10px;
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
         }
 
         .social-links a:hover {
             background: var(--accent);
-            color: var(--bg);
-            transform: translateY(-2px);
+            color: var(--card-bg);
+            transform: scale(1.05);
+            box-shadow: var(--hover-shadow);
         }
 
         .section {
-            margin: 5rem 0;
+            margin: 6rem 0;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
         }
 
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.4s; }
+        .section:nth-child(4) { animation-delay: 0.6s; }
+
         .section h2 {
-            font-size: 1.8rem;
-            margin-bottom: 2.5rem;
-            font-weight: 500;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 3rem;
             position: relative;
-            display: inline-block;
+            color: var(--text);
         }
 
         .section h2::after {
             content: '';
             position: absolute;
-            bottom: -8px;
+            bottom: -12px;
             left: 0;
-            width: 50%;
-            height: 2px;
-            background: var(--accent);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            border-radius: 4px;
         }
 
-        .tech-grid {
+        .tech-grid, .project-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
 
-        .tech-card {
+        .card {
+            background: var(--card-bg);
             padding: 2rem;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            background: var(--bg);
+            border-radius: 15px;
             box-shadow: var(--shadow);
-            transition: transform 0.2s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .tech-card:hover {
-            transform: translateY(-5px);
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--hover-shadow);
         }
 
-        .tech-card i {
-            font-size: 2rem;
-            margin-bottom: 1rem;
+        .card i {
+            font-size: 2.8rem;
             color: var(--accent);
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
         }
 
-        .tech-card h3 {
-            margin-bottom: 0.75rem;
-            font-size: 1.3rem;
+        .card:hover i {
+            transform: scale(1.1);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        .card p {
+            color: var(--subtle);
+            font-size: 1rem;
+        }
+
+        .project-card .github-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .project-card .github-link:hover {
+            color: var(--text);
+            transform: scale(1.05);
         }
 
         .experience-item {
-            margin-bottom: 2.5rem;
-            padding: 2rem;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            background: var(--bg);
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 15px;
             box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .experience-item:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--hover-shadow);
         }
 
         .experience-header {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             margin-bottom: 1rem;
         }
 
         .company {
-            font-weight: 500;
+            font-size: 1.3rem;
+            font-weight: 600;
             color: var(--accent);
         }
 
         .period {
             color: var(--subtle);
+            font-size: 1rem;
         }
 
         footer {
-            margin-top: 6rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border);
+            margin-top: 8rem;
+            padding: 3rem 0;
             text-align: center;
             color: var(--subtle);
-            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            animation: fadeInUp 0.8s ease-out 0.8s forwards;
+            opacity: 0;
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 1024px) {
+            .tech-grid, .project-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
         }
 
         @media (max-width: 768px) {
-            body {
-                padding: 2rem;
+            body { padding: 2rem 1rem; }
+            .container { padding: 0 0.5rem; }
+            .profile { 
+                flex-direction: column; 
+                text-align: center; 
+                padding: 2rem; 
+                gap: 2rem;
             }
-
-            .profile {
-                flex-direction: column;
+            .profile-image { width: 140px; height: 140px; }
+            .profile-info h1 { font-size: 2.5rem; }
+            .social-links { justify-content: center; }
+            .tech-grid, .project-grid { grid-template-columns: 1fr; }
+            .section h2 { font-size: 2rem; }
+            .experience-header { 
+                flex-direction: column; 
+                gap: 0.5rem; 
                 text-align: center;
-                padding: 1.5rem;
             }
+        }
 
-            .profile-image {
-                width: 120px;
-                height: 120px;
-            }
-
-            .social-links {
-                justify-content: center;
-            }
-
-            .tech-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .experience-header {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
+        @media (max-width: 480px) {
+            .profile-info h1 { font-size: 2rem; }
+            .profile-info .role { font-size: 1.1rem; }
+            .social-links a { padding: 0.6rem 1.2rem; }
+            .card { padding: 1.5rem; }
+            .card i { font-size: 2.2rem; }
+            .card h3 { font-size: 1.3rem; }
         }
     </style>
 </head>
@@ -228,15 +307,13 @@
             <img src="https://github.com/victorbrandaao.png" alt="Foto de Victor Brandão, Software Engineer" class="profile-image">
             <div class="profile-info">
                 <h1>Victor Brandão</h1>
-                <div class="role">Software Engineer na Dell Technologies</div>
+                <div class="role">Software Engineer</div>
                 <div class="social-links">
                     <a href="https://github.com/victorbrandaao" target="_blank" aria-label="Visitar meu perfil no GitHub">
-                        <i class="fab fa-github"></i>
-                        <span>GitHub</span>
+                        <i class="fab fa-github"></i> GitHub
                     </a>
                     <a href="https://linkedin.com/in/victorbrandaao" target="_blank" aria-label="Visitar meu perfil no LinkedIn">
-                        <i class="fab fa-linkedin"></i>
-                        <span>LinkedIn</span>
+                        <i class="fab fa-linkedin"></i> LinkedIn
                     </a>
                 </div>
             </div>
@@ -245,17 +322,17 @@
         <section class="section">
             <h2>Tecnologias</h2>
             <div class="tech-grid">
-                <div class="tech-card">
+                <div class="card">
                     <i class="fab fa-c-sharp"></i>
                     <h3>Backend Development</h3>
                     <p>C#, .NET Core, ASP.NET Core, Entity Framework</p>
                 </div>
-                <div class="tech-card">
+                <div class="card">
                     <i class="fas fa-database"></i>
                     <h3>Bancos de Dados</h3>
                     <p>SQL Server, PostgreSQL, MongoDB</p>
                 </div>
-                <div class="tech-card">
+                <div class="card">
                     <i class="fab fa-docker"></i>
                     <h3>Cloud & DevOps</h3>
                     <p>Azure, Docker, CI/CD, Git</p>
@@ -264,28 +341,58 @@
         </section>
 
         <section class="section">
-            <h2>Experiência</h2>
-            <div class="experience-item">
-                <div class="experience-header">
-                    <span class="company">Dell Technologies</span>
-                    <span class="period">2023 - Presente</span>
+            <h2>Projetos</h2>
+            <div class="project-grid">
+                <div class="card project-card">
+                    <i class="fas fa-robot"></i>
+                    <h3>InspirationBot</h3>
+                    <p>Bot em Python que gera frases motivacionais e inspiradoras.</p>
+                    <a href="https://github.com/victorbrandaao/InspirationBot" target="_blank" class="github-link">
+                        <i class="fab fa-github"></i> Ver no GitHub
+                    </a>
                 </div>
-                <h3>Software Engineer</h3>
-                <p>Desenvolvimento de soluções backend e microsserviços utilizando .NET Core e Azure.</p>
-            </div>
-            <!-- Exemplo de item adicional para preencher -->
-            <div class="experience-item">
-                <div class="experience-header">
-                    <span class="company">Projeto Pessoal</span>
-                    <span class="period">2022 - 2023</span>
+                <div class="card project-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>InstagramFollowers</h3>
+                    <p>Aplicação para monitoramento de seguidores no Instagram com C#, HTML, CSS e JS.</p>
+                    <a href="https://github.com/victorbrandaao/InstagramFollowersMonitoring" target="_blank" class="github-link">
+                        <i class="fab fa-github"></i> Ver no GitHub
+                    </a>
                 </div>
-                <h3>Desenvolvedor Full-Stack</h3>
-                <p>Criação de uma aplicação web com .NET e PostgreSQL, hospedada no Azure.</p>
+                <div class="card project-card">
+                    <i class="fas fa-spa"></i>
+                    <h3>Wellness</h3>
+                    <p>App de bem-estar em Swift com técnicas de relaxamento e meditação.</p>
+                    <a href="https://github.com/victorbrandaao/Wellness" target="_blank" class="github-link">
+                        <i class="fab fa-github"></i> Ver no GitHub
+                    </a>
+                </div>
             </div>
         </section>
 
+        <section class="section">
+            <h2>Experiência</h2>
+            <div class="experience-item">
+                <div class="experience-header">
+                    <span class="company">Processtec.com.br</span>
+                    <span class="period">Fevereiro 2025 - Presente</span>
+                </div>
+                <h3>Software Engineer</h3>
+                <p>Desenvolvimento de soluções backend e automações usando N8N, Supabase, Postgree e API do WhatsApp.</p>
+            </div>
+            <div class="experience-item">
+                <div class="experience-header">
+                    <span class="company">Secreraria de Educação do Recife</span>
+                    <span class="period">Julho 2021 - Abril 2023</span>
+                </div>
+                <h3>Assistente de TI</h3>
+                <p>Análise de dados e integração com sistemas legados.</p>
+            </div>
+
+        </section>
+
         <footer>
-            <p>© 2024 Victor Brandão</p>
+            <p>© 2025 Victor Brandão | Feito com 💻 e ☕</p>
         </footer>
     </div>
 </body>
