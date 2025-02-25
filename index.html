@@ -363,89 +363,54 @@
 
         @media (max-width: 768px) {
             body { 
-                padding: 2rem 1rem; 
+                padding: 1rem; /* Reduzido para dar mais espaço */
             }
-            .container { 
-                padding: 0 0.5rem; 
-            }
+            
             .profile { 
-                flex-direction: column; 
-                text-align: center; 
-                padding: 2rem; 
-                gap: 2rem;
-                animation: fadeInUp 0.8s ease-out;
-            }
-            .profile-image { 
-                width: 140px; 
-                height: 140px; 
-                animation: bounce 2s infinite ease-in-out;
-            }
-            .profile-info h1 { 
-                font-size: 2.5rem; 
-            }
-            .social-links { 
-                justify-content: center; 
-            }
-            .social-links a {
-                animation: slideIn 0.5s ease-out forwards;
-            }
-            .social-links a:nth-child(1) { animation-delay: 0.1s; }
-            .social-links a:nth-child(2) { animation-delay: 0.2s; }
-            .tech-grid, .project-grid { 
-                grid-template-columns: 1fr; 
-            }
-            .card {
-                opacity: 0;
-                animation: slideIn 0.6s ease-out forwards;
-            }
-            .card:nth-child(1) { animation-delay: 0.1s; }
-            .card:nth-child(2) { animation-delay: 0.2s; }
-            .card:nth-child(3) { animation-delay: 0.3s; }
-            .card:hover {
-                transform: scale(1.03); /* Removido rotate para evitar bug */
-            }
-            .card i {
-                transition: transform 0.3s ease;
-            }
-            .card:hover i {
-                transform: scale(1.2); /* Simplificado para evitar conflito */
-            }
-            .section h2 { 
-                font-size: 2rem; 
-            }
-            .experience-list {
-                gap: 1.5rem; /* Reduzido para melhor espaçamento em mobile */
-            }
-            .experience-item {
                 padding: 1.5rem;
-                opacity: 0;
-                animation: slideIn 0.6s ease-out forwards;
+                margin-bottom: 3rem; /* Reduzido o espaço inferior */
             }
-            .experience-item:nth-child(1) { animation-delay: 0.1s; }
-            .experience-item:nth-child(2) { animation-delay: 0.2s; }
+            
+            .profile-info h1 { 
+                font-size: 2rem;
+                word-wrap: break-word; /* Previne overflow de texto */
+            }
+            
+            .social-links {
+                flex-direction: column; /* Empilha os links em telas pequenas */
+                width: 100%;
+            }
+            
+            .social-links a {
+                width: 100%; /* Links ocupam largura total */
+                justify-content: center;
+            }
+            
+            .section {
+                margin: 3rem 0; /* Reduz o espaçamento entre seções */
+            }
+            
+            .tech-grid, .project-grid {
+                grid-template-columns: 1fr; /* Uma coluna em mobile */
+                gap: 1rem; /* Reduz o espaço entre cards */
+            }
+            
+            .card {
+                padding: 1.5rem;
+                margin-bottom: 1rem;
+            }
+            
+            .experience-item {
+                padding: 1.2rem;
+            }
+            
             .experience-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.5rem;
-                text-align: left; /* Alinhamento à esquerda para consistência */
+                flex-direction: row; /* Mantém ícone e detalhes na mesma linha */
+                align-items: center;
             }
-            .experience-icon {
-                font-size: 1.8rem; /* Reduzido para caber melhor */
-            }
+            
             .experience-details {
-                width: 100%; /* Garante que ocupe todo o espaço disponível */
-            }
-            .company {
-                font-size: 1.3rem;
-            }
-            .period {
-                font-size: 0.9rem;
-            }
-            .experience-item h3 {
-                font-size: 1.2rem;
-            }
-            .experience-item p {
-                font-size: 0.95rem;
+                word-wrap: break-word; /* Previne overflow de texto */
             }
         }
 
@@ -461,6 +426,28 @@
             .company { font-size: 1.2rem; }
             .experience-item h3 { font-size: 1.1rem; }
             .experience-item p { font-size: 0.9rem; }
+        }
+
+        @media (max-width: 360px) {
+            .profile-info h1 {
+                font-size: 1.75rem;
+            }
+            
+            .role {
+                font-size: 1rem;
+            }
+            
+            .card h3 {
+                font-size: 1.2rem;
+            }
+            
+            .card p {
+                font-size: 0.9rem;
+            }
+            
+            .experience-item {
+                padding: 1rem;
+            }
         }
     </style>
 </head>
