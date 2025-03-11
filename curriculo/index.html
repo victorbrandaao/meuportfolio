@@ -3,19 +3,253 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baixando currículo...</title>
-    <script>
-        window.onload = function() {
-            var link = document.createElement("a");
-            link.href = "/curriculo.pdf"; // Caminho do PDF no seu repositório
-            link.download = "Victor_Brandao_Curriculo.pdf"; // Nome do arquivo ao baixar
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        };
-    </script>
+    <title>Currículo - Victor Brandão</title>
+    <meta name="theme-color" content="#ff6b6b">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        :root {
+            --bg: #f0f4f8;
+            --text: #1e2a44;
+            --accent: #ff6b6b;
+            --subtle: #64748b;
+            --card-bg: #ffffff;
+            --shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #121826;
+                --text: #e2e8f0;
+                --accent: #ff8787;
+                --subtle: #a0b0c8;
+                --card-bg: #1e2a44;
+                --shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 40px 30px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: var(--text);
+        }
+
+        p {
+            margin-bottom: 30px;
+            line-height: 1.6;
+            color: var(--subtle);
+        }
+
+        .icon {
+            font-size: 64px;
+            color: var(--accent);
+            margin-bottom: 24px;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 107, 107, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--accent);
+            animation: spin 1s ease-in-out infinite;
+            margin: 0 auto 20px auto;
+            display: none;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(255, 107, 107, 0.3);
+            gap: 10px;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(255, 107, 107, 0.4);
+        }
+
+        .back-btn {
+            color: var(--subtle);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .back-btn:hover {
+            color: var(--accent);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .download-status {
+            padding: 10px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 14px;
+            display: none;
+        }
+
+        .success {
+            background-color: rgba(72, 187, 120, 0.1);
+            color: #48bb78;
+            display: none;
+        }
+
+        .error {
+            background-color: rgba(245, 101, 101, 0.1);
+            color: #f56565;
+            display: none;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .icon {
+                font-size: 48px;
+                margin-bottom: 20px;
+            }
+            
+            .download-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 <body>
-    <p>Se o download não iniciar automaticamente, <a href="/curriculo.pdf" download>clique aqui</a>.</p>
+    <div class="container">
+        <i class="fas fa-file-pdf icon"></i>
+        <h1>Currículo de Victor Brandão</h1>
+        <p>Seu download deve iniciar automaticamente. Se não começar, use o botão abaixo.</p>
+        
+        <div class="spinner" id="loading-spinner"></div>
+        
+        <div id="success-msg" class="download-status success">
+            Download iniciado com sucesso!
+        </div>
+        
+        <div id="error-msg" class="download-status error">
+            Ocorreu um erro. Por favor, tente o botão abaixo.
+        </div>
+        
+        <a href="../curriculo.pdf" download="Victor_Brandao_Curriculo.pdf" class="download-btn" id="download-btn">
+            <i class="fas fa-download"></i> Baixar Currículo
+        </a>
+        
+        <a href="../index.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Voltar ao portfólio
+        </a>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const downloadBtn = document.getElementById('download-btn');
+            const spinner = document.getElementById('loading-spinner');
+            const successMsg = document.getElementById('success-msg');
+            const errorMsg = document.getElementById('error-msg');
+            
+            // Tenta iniciar o download automaticamente
+            setTimeout(function() {
+                try {
+                    spinner.style.display = 'block';
+                    
+                    // Criando um link temporário para download
+                    const link = document.createElement("a");
+                    link.href = "../curriculo.pdf";
+                    link.download = "Victor_Brandao_Curriculo.pdf";
+                    link.style.display = 'none';
+                    
+                    document.body.appendChild(link);
+                    
+                    // Verifica se o download está disponível em navegadores móveis
+                    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+                    
+                    if (isMobile && /iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                        // Em iOS, não podemos forçar o download, então apenas redirecionar
+                        window.location.href = "../curriculo.pdf";
+                    } else {
+                        // Em outros dispositivos, tentamos o download automático
+                        link.click();
+                        
+                        // Mostrar mensagem de sucesso
+                        setTimeout(function() {
+                            spinner.style.display = 'none';
+                            successMsg.style.display = 'block';
+                        }, 1000);
+                    }
+                    
+                    document.body.removeChild(link);
+                } catch (error) {
+                    console.error("Erro ao iniciar download:", error);
+                    spinner.style.display = 'none';
+                    errorMsg.style.display = 'block';
+                }
+            }, 800);
+            
+            // Adiciona evento ao botão de download manual
+            downloadBtn.addEventListener('click', function() {
+                successMsg.style.display = 'block';
+                errorMsg.style.display = 'none';
+            });
+        });
+    </script>
 </body>
 </html>

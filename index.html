@@ -436,6 +436,22 @@
         @media (max-width: 768px) {
             body { 
                 padding: 1rem;
+                padding-top: 4rem; /* Espaço para o botão de tema */
+            }
+            
+            #theme-toggle {
+                /* Posição fixa para dispositivos móveis */
+                top: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            
+            .container {
+                /* Garantir que o botão não sobreponha o conteúdo */
+                position: relative;
+                padding-top: 10px;
             }
             
             .profile { 
@@ -598,6 +614,21 @@
                 font-size: 0.85rem;
             }
         }
+
+        /* Melhorias para iOS */
+        @supports (-webkit-touch-callout: none) {
+            body {
+                /* Previne problemas com o height: 100vh no Safari iOS */
+                min-height: -webkit-fill-available;
+            }
+            
+            #theme-toggle {
+                /* Posiciona de forma mais segura no iOS */
+                position: absolute;
+                top: 20px;
+                right: 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -705,12 +736,17 @@
         </footer>
     </div>
     <script>
+        // Verifica se estamos em um dispositivo iOS
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        
+        // Se for iOS, adiciona classes específicas
+        if (isIOS) {
+            document.body.classList.add('ios-device');
+        }
+        
         // Função para alternar o tema
         function toggleTheme() {
             const body = document.body;
-            const themeToggle = document.getElementById('theme-toggle');
-            const moonIcon = themeToggle.querySelector('.fa-moon');
-            const sunIcon = themeToggle.querySelector('.fa-sun');
             
             // Se não tiver classe de tema, verificamos a preferência do sistema
             if (!body.classList.contains('light-theme') && !body.classList.contains('dark-theme')) {
@@ -747,14 +783,23 @@
             }
         }
         
-        // Adiciona o ícone do sol ao botão de tema
-        document.getElementById('theme-toggle').innerHTML = '<i class="fas fa-moon"></i><i class="fas fa-sun"></i>';
-        
-        // Define o tema inicial
-        setInitialTheme();
-        
-        // Adiciona o evento de clique ao botão
-        document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+        // Função para verificar se o documento está totalmente carregado
+        document.addEventListener('DOMContentLoaded', function() {
+            // Adiciona o ícone do sol ao botão de tema
+            const themeToggle = document.getElementById('theme-toggle');
+            if (themeToggle) {
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i><i class="fas fa-sun"></i>';
+                themeToggle.addEventListener('click', toggleTheme);
+            }
+            
+            // Define o tema inicial
+            setInitialTheme();
+            
+            // Adiciona uma classe quando o site estiver carregado
+            setTimeout(function() {
+                document.body.classList.add('loaded');
+            }, 100);
+        });
     </script>
 </body>
 </html>
