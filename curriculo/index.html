@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baixando currículo...</title>
+    <script>
+        window.onload = function() {
+            var link = document.createElement("a");
+            link.href = "/curriculo.pdf"; // Caminho do PDF no seu repositório
+            link.download = "Victor_Brandao_Curriculo.pdf"; // Nome do arquivo ao baixar
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        };
+    </script>
+</head>
+<body>
+    <p>Se o download não iniciar automaticamente, <a href="/curriculo.pdf" download>clique aqui</a>.</p>
+</body>
+</html>
