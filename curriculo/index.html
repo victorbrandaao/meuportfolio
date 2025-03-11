@@ -90,24 +90,41 @@
             display: none;
         }
 
-        .download-btn {
+        /* Botões de ação */
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+            width: 100%;
+        }
+
+        .btn {
             display: inline-flex;
             align-items: center;
-            background-color: var(--accent);
-            color: white;
+            justify-content: center;
+            gap: 10px;
             padding: 12px 30px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s ease;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 8px rgba(255, 107, 107, 0.3);
-            gap: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
         }
 
-        .download-btn:hover {
+        .primary-btn {
+            background-color: var(--accent);
+            color: white;
+        }
+
+        .secondary-btn {
+            background-color: var(--subtle);
+            color: white;
+        }
+
+        .btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(255, 107, 107, 0.4);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
         }
 
         .back-btn {
@@ -118,12 +135,50 @@
             gap: 8px;
             font-size: 14px;
             transition: color 0.3s ease;
+            margin-top: 10px;
         }
 
         .back-btn:hover {
             color: var(--accent);
         }
 
+        /* Estilos para o iframe do PDF */
+        .pdf-container {
+            width: 100%;
+            height: 500px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow);
+            display: none;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Status e mensagens */
+        .status-message {
+            padding: 10px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-size: 14px;
+            display: none;
+        }
+
+        .success {
+            background-color: rgba(72, 187, 120, 0.1);
+            color: #48bb78;
+        }
+
+        .error {
+            background-color: rgba(245, 101, 101, 0.1);
+            color: #f56565;
+        }
+
+        /* Animações */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -133,26 +188,7 @@
             to { transform: rotate(360deg); }
         }
 
-        .download-status {
-            padding: 10px;
-            border-radius: 8px;
-            margin: 20px 0;
-            font-size: 14px;
-            display: none;
-        }
-
-        .success {
-            background-color: rgba(72, 187, 120, 0.1);
-            color: #48bb78;
-            display: none;
-        }
-
-        .error {
-            background-color: rgba(245, 101, 101, 0.1);
-            color: #f56565;
-            display: none;
-        }
-
+        /* Responsividade */
         @media (max-width: 480px) {
             .container {
                 padding: 30px 20px;
@@ -167,9 +203,12 @@
                 margin-bottom: 20px;
             }
             
-            .download-btn {
+            .btn {
                 width: 100%;
-                justify-content: center;
+            }
+            
+            .pdf-container {
+                height: 400px;
             }
         }
     </style>
@@ -178,21 +217,31 @@
     <div class="container">
         <i class="fas fa-file-pdf icon"></i>
         <h1>Currículo de Victor Brandão</h1>
-        <p>Seu download deve iniciar automaticamente. Se não começar, use o botão abaixo.</p>
+        <p>Visualize meu currículo online ou faça o download</p>
         
         <div class="spinner" id="loading-spinner"></div>
         
-        <div id="success-msg" class="download-status success">
-            Download iniciado com sucesso!
+        <div class="pdf-container" id="pdf-container">
+            <iframe id="pdf-iframe" title="Currículo de Victor Brandão"></iframe>
         </div>
         
-        <div id="error-msg" class="download-status error">
-            Ocorreu um erro. Por favor, tente o botão abaixo.
+        <div id="success-message" class="status-message success">
+            PDF carregado com sucesso!
         </div>
         
-        <a href="../curriculo.pdf" download="Victor_Brandao_Curriculo.pdf" class="download-btn" id="download-btn">
-            <i class="fas fa-download"></i> Baixar Currículo
-        </a>
+        <div id="error-message" class="status-message error">
+            Não foi possível carregar o PDF. Por favor, tente uma das opções abaixo.
+        </div>
+        
+        <div class="action-buttons">
+            <a href="#" id="view-btn" class="btn primary-btn">
+                <i class="fas fa-eye"></i> Visualizar Currículo
+            </a>
+            
+            <a href="../curriculo.pdf" download="Victor_Brandao_Curriculo.pdf" class="btn secondary-btn" id="download-btn">
+                <i class="fas fa-download"></i> Baixar Currículo
+            </a>
+        </div>
         
         <a href="../index.html" class="back-btn">
             <i class="fas fa-arrow-left"></i> Voltar ao portfólio
@@ -201,53 +250,96 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Elementos do DOM
+            const viewBtn = document.getElementById('view-btn');
             const downloadBtn = document.getElementById('download-btn');
+            const pdfContainer = document.getElementById('pdf-container');
+            const pdfIframe = document.getElementById('pdf-iframe');
             const spinner = document.getElementById('loading-spinner');
-            const successMsg = document.getElementById('success-msg');
-            const errorMsg = document.getElementById('error-msg');
+            const successMsg = document.getElementById('success-message');
+            const errorMsg = document.getElementById('error-message');
             
-            // Tenta iniciar o download automaticamente
-            setTimeout(function() {
+            // Caminhos possíveis para o PDF
+            const pdfPaths = [
+                '../curriculo.pdf',
+                'curriculo.pdf',
+                './curriculo.pdf',
+                '/curriculo/curriculo.pdf'
+            ];
+            
+            // Detectar dispositivo iOS
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+            
+            // Função para verificar qual caminho do PDF está acessível
+            async function findPDFPath() {
+                for (const path of pdfPaths) {
+                    try {
+                        const response = await fetch(path, { method: 'HEAD' });
+                        if (response.ok) {
+                            return path;
+                        }
+                    } catch (error) {
+                        console.log(`Caminho ${path} não encontrado`);
+                    }
+                }
+                return null;
+            }
+            
+            // Função para carregar o PDF
+            async function loadPDF() {
+                spinner.style.display = 'block';
+                
                 try {
-                    spinner.style.display = 'block';
+                    const pdfPath = await findPDFPath();
                     
-                    // Criando um link temporário para download
-                    const link = document.createElement("a");
-                    link.href = "../curriculo.pdf";
-                    link.download = "Victor_Brandao_Curriculo.pdf";
-                    link.style.display = 'none';
-                    
-                    document.body.appendChild(link);
-                    
-                    // Verifica se o download está disponível em navegadores móveis
-                    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-                    
-                    if (isMobile && /iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-                        // Em iOS, não podemos forçar o download, então apenas redirecionar
-                        window.location.href = "../curriculo.pdf";
-                    } else {
-                        // Em outros dispositivos, tentamos o download automático
-                        link.click();
-                        
-                        // Mostrar mensagem de sucesso
-                        setTimeout(function() {
-                            spinner.style.display = 'none';
-                            successMsg.style.display = 'block';
-                        }, 1000);
+                    if (!pdfPath) {
+                        throw new Error("Arquivo PDF não encontrado");
                     }
                     
-                    document.body.removeChild(link);
+                    // Atualizar os links com o caminho correto
+                    downloadBtn.href = pdfPath;
+                    
+                    // Se for iOS, configuramos o botão para abrir diretamente
+                    if (isIOS) {
+                        viewBtn.href = pdfPath;
+                        viewBtn.target = '_blank';
+                    } else {
+                        // Para outros dispositivos, carregamos no iframe
+                        pdfIframe.src = pdfPath;
+                        pdfContainer.style.display = 'block';
+                        successMsg.style.display = 'block';
+                    }
+                    
+                    spinner.style.display = 'none';
+                    
                 } catch (error) {
-                    console.error("Erro ao iniciar download:", error);
+                    console.error("Erro ao carregar PDF:", error);
                     spinner.style.display = 'none';
                     errorMsg.style.display = 'block';
                 }
-            }, 800);
+            }
             
-            // Adiciona evento ao botão de download manual
-            downloadBtn.addEventListener('click', function() {
-                successMsg.style.display = 'block';
-                errorMsg.style.display = 'none';
+            // Para dispositivos não-iOS, adiciona evento ao botão de visualização
+            if (!isIOS) {
+                viewBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    loadPDF();
+                });
+            }
+            
+            // No carregamento da página, verificamos o caminho do PDF
+            findPDFPath().then(pdfPath => {
+                if (pdfPath) {
+                    // Atualizamos os links com o caminho correto
+                    downloadBtn.href = pdfPath;
+                    
+                    if (isIOS) {
+                        viewBtn.href = pdfPath;
+                        viewBtn.target = '_blank';
+                    }
+                } else {
+                    errorMsg.style.display = 'block';
+                }
             });
         });
     </script>
