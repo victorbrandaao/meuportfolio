@@ -71,6 +71,43 @@ document.addEventListener("DOMContentLoaded", () => {
     },
   ];
 
+  // Render Projects
+  const renderProjects = () => {
+    const projectsGrid = document.getElementById('projects-grid');
+    if (!projectsGrid) return;
+
+    projectsGrid.innerHTML = '';
+
+    salesforceProjects.forEach(project => {
+      const projectCard = document.createElement('div');
+      projectCard.className = 'project-card fade-in-up';
+      projectCard.setAttribute('data-category', project.category.join(' '));
+
+      projectCard.innerHTML = `
+        <div class="project-image">
+          <i class="${project.icon}"></i>
+        </div>
+        <div class="project-content">
+          <div class="project-tags">
+            ${project.technologies.map(tech => `<span class="project-tag">${tech}</span>`).join('')}
+          </div>
+          <h3 class="project-title">${project.title}</h3>
+          <p class="project-description">${project.description}</p>
+          <div class="project-links">
+            ${project.githubUrl !== '#' ? `<a href="${project.githubUrl}" target="_blank" class="project-link">
+              <i class="fab fa-github"></i> GitHub
+            </a>` : ''}
+            ${project.demoUrl && project.demoUrl !== '#' ? `<a href="${project.demoUrl}" target="_blank" class="project-link">
+              <i class="fas fa-external-link-alt"></i> Demo
+            </a>` : ''}
+          </div>
+        </div>
+      `;
+
+      projectsGrid.appendChild(projectCard);
+    });
+  };
+
   // Project Filtering System
   const initProjectFilters = () => {
     const filterButtons = document.querySelectorAll(".filter-btn");
@@ -131,6 +168,27 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
+  // General Animations
+  const initAnimations = () => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all fade-in elements
+    document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right').forEach(el => {
+      observer.observe(el);
+    });
+  };
+
   // Theme Toggle Functionality
   const initThemeToggle = () => {
     const themeToggle = document.querySelector(".theme-toggle");
@@ -143,6 +201,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (currentTheme === "light") {
       document.body.classList.add("light-theme");
+      if (themeToggle) {
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+      }
     }
 
     if (themeToggle) {
@@ -153,10 +214,12 @@ document.addEventListener("DOMContentLoaded", () => {
           document.body.classList.remove("light-theme");
           document.documentElement.setAttribute("data-theme", "dark");
           localStorage.setItem("theme", "dark");
+          themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
         } else {
           document.body.classList.add("light-theme");
           document.documentElement.setAttribute("data-theme", "light");
           localStorage.setItem("theme", "light");
+          themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
         }
       });
     }
@@ -182,6 +245,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const initNavigation = () => {
     const navLinks = document.querySelectorAll(".nav-link");
     const sections = document.querySelectorAll("section[id]");
+    const nav = document.querySelector(".nav");
 
     const setActiveNavLink = () => {
       let current = "";
@@ -200,6 +264,13 @@ document.addEventListener("DOMContentLoaded", () => {
           link.classList.add("active");
         }
       });
+
+      // Add scrolled class to nav
+      if (window.pageYOffset > 100) {
+        nav.classList.add("scrolled");
+      } else {
+        nav.classList.remove("scrolled");
+      }
     };
 
     window.addEventListener("scroll", setActiveNavLink);
@@ -211,6 +282,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (mobileToggle && mobileMenu) {
       mobileToggle.addEventListener("click", () => {
         mobileMenu.classList.toggle("active");
+        
+        // Toggle hamburger icon
+        const icon = mobileToggle.querySelector('i');
+        if (mobileMenu.classList.contains('active')) {
+          icon.className = 'fas fa-times';
+        } else {
+          icon.className = 'fas fa-bars';
+        }
       });
 
       // Close mobile menu when clicking on a link
@@ -218,6 +297,7 @@ document.addEventListener("DOMContentLoaded", () => {
       mobileLinks.forEach((link) => {
         link.addEventListener("click", () => {
           mobileMenu.classList.remove("active");
+          mobileToggle.querySelector('i').className = 'fas fa-bars';
         });
       });
     }
@@ -249,10 +329,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const formData = new FormData(contactForm);
         const formButton = contactForm.querySelector(".form-submit");
-        const originalText = formButton.textContent;
+        const originalText = formButton.innerHTML;
 
         // Show loading state
-        formButton.textContent = "Enviando...";
+        formButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
         formButton.disabled = true;
 
         try {
@@ -260,24 +340,24 @@ document.addEventListener("DOMContentLoaded", () => {
           await new Promise((resolve) => setTimeout(resolve, 2000));
 
           // Success feedback
-          formButton.textContent = "Mensagem Enviada!";
+          formButton.innerHTML = '<i class="fas fa-check"></i> Mensagem Enviada!';
           formButton.style.background = "var(--accent-secondary)";
 
           // Reset form
           contactForm.reset();
 
           setTimeout(() => {
-            formButton.textContent = originalText;
+            formButton.innerHTML = originalText;
             formButton.disabled = false;
             formButton.style.background = "";
           }, 3000);
         } catch (error) {
           console.error("Erro ao enviar formulário:", error);
-          formButton.textContent = "Erro - Tente novamente";
-          formButton.style.background = "var(--accent)";
+          formButton.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Erro - Tente novamente';
+          formButton.style.background = "#f56565";
 
           setTimeout(() => {
-            formButton.textContent = originalText;
+            formButton.innerHTML = originalText;
             formButton.disabled = false;
             formButton.style.background = "";
           }, 3000);
@@ -300,11 +380,20 @@ document.addEventListener("DOMContentLoaded", () => {
             const mobileMenu = document.querySelector(".mobile-menu");
             if (mobileMenu && mobileMenu.classList.contains("active")) {
               mobileMenu.classList.remove("active");
+              const mobileToggle = document.querySelector(".mobile-menu-toggle");
+              if (mobileToggle) {
+                mobileToggle.querySelector('i').className = 'fas fa-bars';
+              }
             }
 
-            targetElement.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
+            // Calculate offset for fixed navigation
+            const offset = 80;
+            const elementPosition = targetElement.offsetTop;
+            const offsetPosition = elementPosition - offset;
+
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: "smooth"
             });
           } else if (targetId === "#") {
             window.scrollTo({ top: 0, behavior: "smooth" });
@@ -317,6 +406,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // Initialize all functionality
+  renderProjects();
   initProjectFilters();
   initAnimations();
   initSmoothScroll();
