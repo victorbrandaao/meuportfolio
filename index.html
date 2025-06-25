@@ -1,419 +1,83 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Victor Brandão | Salesforce Developer & Software Engineer</title>
-    <meta name="description" content="Desenvolvedor Salesforce especializado em Apex, Lightning Web Components e integração de sistemas.">
-    <meta name="keywords" content="Victor Brandão, Salesforce Developer, Apex, Lightning, Backend, JavaScript, C#">
-    <meta property="og:title" content="Victor Brandão | Salesforce Developer">
-    <meta property="og:description" content="Desenvolvedor especializado em Salesforce com experiência em Apex, LWC e integrações!">
-    <meta property="og:image" content="https://github.com/victorbrandaao.png">
-    <meta property="og:type" content="website">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <!-- Scroll Progress Indicator -->
-    <div class="scroll-indicator">
-        <div class="scroll-progress"></div>
-    </div>
-
-    <!-- Particles Background -->
-    <div class="particles"></div>
-
-    <!-- Navigation -->
-    <nav class="nav">
-        <div class="nav-content">
-            <a href="#" class="nav-logo">Victor Brandão</a>
+<!-- Apenas a seção atualizada do Hero -->
+<section id="home" class="hero">
+    <div class="container">
+        <div class="hero-content fade-in-up">
+            <div class="hero-image">
+                <img src="https://github.com/victorbrandaao.png" alt="Victor Brandão" onerror="this.src='data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><text y=\'.9em\' font-size=\'90\'>👨‍💻</text></svg>'">
+                <div class="hero-badge">🚀 Aprendendo Salesforce</div>
+            </div>
             
-            <ul class="nav-links">
-                <li><a href="#home" class="nav-link">Início</a></li>
-                <li><a href="#about" class="nav-link">Sobre</a></li>
-                <li><a href="#skills" class="nav-link">Habilidades</a></li>
-                <li><a href="#projects" class="nav-link">Projetos</a></li>
-                <li><a href="#contact" class="nav-link">Contato</a></li>
-            </ul>
+            <h1 class="hero-title">Victor Brandão</h1>
+            <h2 class="hero-subtitle">Futuro Salesforce Developer | Em Formação</h2>
+            <p class="hero-description">
+                Desenvolvedor apaixonado por tecnologia em jornada intensiva de aprendizado Salesforce. 
+                Criando projetos reais com Apex, Lightning Web Components e integrações, 
+                sempre focado em soluções inovadoras e experiência do usuário excepcional.
+            </p>
 
-            <div class="nav-actions">
-                <button class="theme-toggle" aria-label="Toggle theme">
-                    <i class="fas fa-moon"></i>
-                </button>
-                <button class="mobile-menu-toggle">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Mobile Menu -->
-    <div class="mobile-menu">
-        <ul class="nav-links">
-            <li><a href="#home" class="nav-link">Início</a></li>
-            <li><a href="#about" class="nav-link">Sobre</a></li>
-            <li><a href="#skills" class="nav-link">Habilidades</a></li>
-            <li><a href="#projects" class="nav-link">Projetos</a></li>
-            <li><a href="#contact" class="nav-link">Contato</a></li>
-        </ul>
-    </div>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content fade-in-up">
-                <div class="hero-image">
-                    <img src="https://github.com/victorbrandaao.png" alt="Victor Brandão" onerror="this.src='data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><circle cx=\'50\' cy=\'50\' r=\'40\' fill=\'%233366ff\'/><text x=\'50\' y=\'60\' text-anchor=\'middle\' fill=\'white\' font-size=\'30\' font-family=\'Arial\'>VB</text></svg>'">
-                    <div class="hero-badge">🚀 Disponível</div>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="hero-stat-number">2+</span>
+                    <span class="hero-stat-label">Anos Programando</span>
                 </div>
-                
-                <h1 class="hero-title">Victor Brandão</h1>
-                <h2 class="hero-subtitle">Salesforce Developer & Software Engineer</h2>
-                <p class="hero-description">
-                    Desenvolvedor especializado em Salesforce com experiência em Apex, Lightning Web Components, 
-                    integração de sistemas e desenvolvimento full-stack. Apaixonado por criar soluções inovadoras 
-                    que impulsionam o crescimento dos negócios.
-                </p>
-
-                <div class="hero-stats">
-                    <div class="hero-stat">
-                        <span class="hero-stat-number">3+</span>
-                        <span class="hero-stat-label">Anos de Experiência</span>
-                    </div>
-                    <div class="hero-stat">
-                        <span class="hero-stat-number">20+</span>
-                        <span class="hero-stat-label">Projetos Entregues</span>
-                    </div>
-                    <div class="hero-stat">
-                        <span class="hero-stat-number">5+</span>
-                        <span class="hero-stat-label">Certificações</span>
-                    </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">7+</span>
+                    <span class="hero-stat-label">Projetos GitHub</span>
                 </div>
-
-                <div class="hero-cta">
-                    <a href="#contact" class="btn btn-primary">
-                        <i class="fas fa-envelope"></i>
-                        Entre em Contato
-                    </a>
-                    <a href="curriculo/index.html" class="btn btn-secondary">
-                        <i class="fas fa-file-pdf"></i>
-                        Ver Currículo
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="section">
-        <div class="container">
-            <div class="section-header fade-in-up">
-                <span class="section-badge">Sobre Mim</span>
-                <h2 class="section-title">Desenvolvedor Salesforce Especialista</h2>
-                <p class="section-description">
-                    Com mais de 3 anos de experiência em desenvolvimento Salesforce, 
-                    especializo-me em criar soluções robustas e escaláveis para empresas de todos os tamanhos.
-                </p>
-            </div>
-
-            <div class="grid grid-2">
-                <div class="glass-card fade-in-left">
-                    <div class="card-icon">
-                        <i class="fab fa-salesforce"></i>
-                    </div>
-                    <h3 class="card-title">Salesforce Expert</h3>
-                    <p class="card-description">
-                        Especialista em Apex, Lightning Web Components, Flow Builder, e integrações complexas. 
-                        Experiência com Sales Cloud, Service Cloud e Community Cloud.
-                    </p>
-                </div>
-
-                <div class="glass-card fade-in-right">
-                    <div class="card-icon">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h3 class="card-title">Full Stack Developer</h3>
-                    <p class="card-description">
-                        Desenvolvimento completo desde backend até frontend, utilizando tecnologias modernas 
-                        como JavaScript, React, Node.js, C# e integrações com APIs REST/SOAP.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="section">
-        <div class="container">
-            <div class="section-header fade-in-up">
-                <span class="section-badge">Habilidades</span>
-                <h2 class="section-title">Tecnologias e Ferramentas</h2>
-                <p class="section-description">
-                    Conjunto abrangente de habilidades técnicas focadas no ecossistema Salesforce e desenvolvimento moderno.
-                </p>
-            </div>
-
-            <div class="skills-container">
-                <!-- Salesforce Skills -->
-                <div class="skill-category fade-in-up">
-                    <h3 class="skill-category-title">🏛️ Salesforce Platform</h3>
-                    <div class="skills-grid">
-                        <div class="skill-item">
-                            <div class="skill-icon">
-                                <i class="fab fa-salesforce"></i>
-                            </div>
-                            <div class="skill-info">
-                                <h4>Apex & SOQL</h4>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-width="95"></div>
-                                </div>
-                                <span class="skill-percentage">95%</span>
-                            </div>
-                        </div>
-
-                        <div class="skill-item">
-                            <div class="skill-icon">
-                                <i class="fas fa-bolt"></i>
-                            </div>
-                            <div class="skill-info">
-                                <h4>Lightning Web Components</h4>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-width="90"></div>
-                                </div>
-                                <span class="skill-percentage">90%</span>
-                            </div>
-                        </div>
-
-                        <div class="skill-item">
-                            <div class="skill-icon">
-                                <i class="fas fa-stream"></i>
-                            </div>
-                            <div class="skill-info">
-                                <h4>Flow Builder & Process Builder</h4>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-width="88"></div>
-                                </div>
-                                <span class="skill-percentage">88%</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Backend Skills -->
-                <div class="skill-category fade-in-up">
-                    <h3 class="skill-category-title">⚙️ Backend Development</h3>
-                    <div class="skills-grid">
-                        <div class="skill-item">
-                            <div class="skill-icon">
-                                <i class="fab fa-js-square"></i>
-                            </div>
-                            <div class="skill-info">
-                                <h4>JavaScript & Node.js</h4>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-width="85"></div>
-                                </div>
-                                <span class="skill-percentage">85%</span>
-                            </div>
-                        </div>
-
-                        <div class="skill-item">
-                            <div class="skill-icon">
-                                <i class="fas fa-hashtag"></i>
-                            </div>
-                            <div class="skill-info">
-                                <h4>C# & .NET</h4>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-width="80"></div>
-                                </div>
-                                <span class="skill-percentage">80%</span>
-                            </div>
-                        </div>
-
-                        <div class="skill-item">
-                            <div class="skill-icon">
-                                <i class="fas fa-exchange-alt"></i>
-                            </div>
-                            <div class="skill-info">
-                                <h4>REST/SOAP APIs</h4>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-width="92"></div>
-                                </div>
-                                <span class="skill-percentage">92%</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Frontend Skills -->
-                <div class="skill-category fade-in-up">
-                    <h3 class="skill-category-title">🎨 Frontend Development</h3>
-                    <div class="skills-grid">
-                        <div class="skill-item">
-                            <div class="skill-icon">
-                                <i class="fab fa-react"></i>
-                            </div>
-                            <div class="skill-info">
-                                <h4>React & Next.js</h4>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-width="82"></div>
-                                </div>
-                                <span class="skill-percentage">82%</span>
-                            </div>
-                        </div>
-
-                        <div class="skill-item">
-                            <div class="skill-icon">
-                                <i class="fab fa-html5"></i>
-                            </div>
-                            <div class="skill-info">
-                                <h4>HTML5 & CSS3</h4>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-width="88"></div>
-                                </div>
-                                <span class="skill-percentage">88%</span>
-                            </div>
-                        </div>
-
-                        <div class="skill-item">
-                            <div class="skill-icon">
-                                <i class="fab fa-bootstrap"></i>
-                            </div>
-                            <div class="skill-info">
-                                <h4>Bootstrap & Tailwind</h4>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-width="85"></div>
-                                </div>
-                                <span class="skill-percentage">85%</span>
-                            </div>
-                        </div>
-                    </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">800+</span>
+                    <span class="hero-stat-label">Usuários Arc Pilot</span>
                 </div>
             </div>
 
-            <!-- Certifications -->
-            <div class="certifications fade-in-up">
-                <h3 class="certifications-title">🏆 Certificações Salesforce</h3>
-                <div class="certifications-grid">
-                    <div class="cert-item">
-                        <div class="cert-badge">
-                            <i class="fab fa-salesforce"></i>
-                        </div>
-                        <h4>Platform Developer I</h4>
-                        <p>Salesforce Certified</p>
-                        <span class="cert-date">2023</span>
-                    </div>
-
-                    <div class="cert-item">
-                        <div class="cert-badge">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <h4>Administrator</h4>
-                        <p>Salesforce Certified</p>
-                        <span class="cert-date">2022</span>
-                    </div>
-
-                    <div class="cert-item">
-                        <div class="cert-badge">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h4>Sales Cloud Consultant</h4>
-                        <p>Salesforce Certified</p>
-                        <span class="cert-date">2023</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="section">
-        <div class="container">
-            <div class="section-header fade-in-up">
-                <span class="section-badge">Projetos</span>
-                <h2 class="section-title">Meus Trabalhos</h2>
-                <p class="section-description">
-                    Seleção de projetos que demonstram minha experiência em desenvolvimento Salesforce e tecnologias modernas.
-                </p>
-            </div>
-
-            <!-- Project Filters -->
-            <div class="project-filters fade-in-up">
-                <button class="filter-btn active" data-filter="all">Todos</button>
-                <button class="filter-btn" data-filter="salesforce">Salesforce</button>
-                <button class="filter-btn" data-filter="tools">Ferramentas</button>
-                <button class="filter-btn" data-filter="backend">Backend</button>
-                <button class="filter-btn" data-filter="automation">Automação</button>
-            </div>
-
-            <!-- Projects Grid -->
-            <div class="grid grid-3" id="projects-grid">
-                <!-- Projects will be dynamically inserted here by JavaScript -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="section">
-        <div class="container">
-            <div class="section-header fade-in-up">
-                <span class="section-badge">Contato</span>
-                <h2 class="section-title">Vamos Trabalhar Juntos</h2>
-                <p class="section-description">
-                    Pronto para discutir seu próximo projeto Salesforce? Entre em contato comigo!
-                </p>
-            </div>
-
-            <div class="contact-form fade-in-up">
-                <form id="contact-form">
-                    <div class="form-group">
-                        <label for="name" class="form-label">Nome</label>
-                        <input type="text" id="name" name="name" class="form-input" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" id="email" name="email" class="form-input" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="subject" class="form-label">Assunto</label>
-                        <input type="text" id="subject" name="subject" class="form-input" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="message" class="form-label">Mensagem</label>
-                        <textarea id="message" name="message" class="form-textarea" required></textarea>
-                    </div>
-
-                    <button type="submit" class="form-submit">
-                        <i class="fas fa-paper-plane"></i>
-                        Enviar Mensagem
-                    </button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="social-links">
-                <a href="https://github.com/victorbrandaao" target="_blank" class="social-link">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="https://linkedin.com/in/victorbrandaao" target="_blank" class="social-link">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <a href="mailto:victor@exemplo.com" class="social-link">
+            <div class="hero-cta">
+                <a href="#contact" class="btn btn-primary">
                     <i class="fas fa-envelope"></i>
+                    Vamos Conversar
+                </a>
+                <a href="curriculo/index.html" class="btn btn-secondary">
+                    <i class="fas fa-file-pdf"></i>
+                    Ver Currículo
                 </a>
             </div>
-            <p>&copy; 2024 Victor Brandão. Todos os direitos reservados.</p>
         </div>
-    </footer>
+    </div>
+</section>
 
-    <script src="script.js"></script>
-</body>
-</html>
+<!-- Seção About atualizada -->
+<section id="about" class="section">
+    <div class="container">
+        <div class="section-header fade-in-up">
+            <span class="section-badge">Sobre Mim</span>
+            <h2 class="section-title">Desenvolvedor Salesforce em Formação</h2>
+            <p class="section-description">
+                Em transição para me tornar um Salesforce Developer completo, combinando 
+                minha experiência em desenvolvimento com aprendizado intensivo na plataforma Salesforce.
+            </p>
+        </div>
+
+        <div class="grid grid-2">
+            <div class="glass-card fade-in-left">
+                <div class="card-icon">
+                    <i class="fab fa-salesforce"></i>
+                </div>
+                <h3 class="card-title">Salesforce Learner</h3>
+                <p class="card-description">
+                    Estudando intensivamente Apex, Lightning Web Components, Flow Builder e integrações. 
+                    Criando projetos reais como Event Management System e Salesforce Arc Pilot.
+                </p>
+            </div>
+
+            <div class="glass-card fade-in-right">
+                <div class="card-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3 class="card-title">Programador Experiente</h3>
+                <p class="card-description">
+                    Base sólida em desenvolvimento com JavaScript, C#, Node.js e criação de ferramentas. 
+                    Aplicando esses conhecimentos para acelerar meu aprendizado Salesforce.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
