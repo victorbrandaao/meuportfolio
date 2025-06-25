@@ -1,74 +1,92 @@
-// Salesforce Portfolio Scripts
+// Salesforce Portfolio Scripts - Atualizado com projetos reais
 document.addEventListener("DOMContentLoaded", () => {
-  // Salesforce Projects Data - Projetos focados em Salesforce
+  // Salesforce Projects Data - Projetos reais do GitHub
   const salesforceProjects = [
     {
       id: 1,
-      title: "Salesforce Arc Pilot",
+      title: "🚀 Salesforce Arc Pilot",
       description:
-        "Extensão completa para Chrome que revoluciona o workflow de desenvolvedores Salesforce. Organização inteligente de orgs, busca avançada e sincronização na nuvem.",
+        "Extensão completa para Chrome que revoluciona o workflow de desenvolvedores Salesforce. Organização inteligente de orgs, busca avançada, analytics dashboard e sincronização na nuvem. Mais de 800+ desenvolvedores já usam!",
       category: ["salesforce", "tools"],
-      technologies: ["Chrome Extension", "JavaScript", "Salesforce API"],
+      technologies: ["Chrome Extension", "JavaScript", "Node.js", "Railway", "HTML/CSS"],
       icon: "fas fa-rocket",
       githubUrl: "https://github.com/victorbrandaao/SalesforceArcPilot",
-      demoUrl: "#",
+      demoUrl: "https://victorbrandaao.github.io/salesforce-arc-pilot-landing",
       featured: true,
+      stats: "⭐ 4.9/5 - 800+ usuários"
     },
     {
       id: 2,
-      title: "Event Management System",
+      title: "🎉 Event Management System",
       description:
-        "Sistema completo de gerenciamento de eventos construído na plataforma Salesforce. Inclui automações, relatórios personalizados e integração com APIs externas.",
+        "Sistema completo de gerenciamento de eventos construído na plataforma Salesforce. Inclui controle de capacidade, automação de emails, Lightning Web Components dinâmicos e testes com 100% de cobertura.",
       category: ["salesforce"],
-      technologies: ["Apex", "Lightning Web Components", "SOQL", "REST API"],
+      technologies: ["Apex", "Lightning Web Components", "SOQL", "Salesforce Flow", "SLDS"],
       icon: "fas fa-calendar-alt",
       githubUrl: "https://github.com/victorbrandaao/EventManagementSystem",
       featured: true,
+      stats: "🧪 100% test coverage"
     },
     {
       id: 3,
-      title: "Apex Utility Framework",
+      title: "📚 Salesforce Learning Journey",
       description:
-        "Framework de utilitários em Apex para acelerar o desenvolvimento Salesforce. Inclui validações, formatações e helpers comuns.",
-      category: ["salesforce", "backend"],
-      technologies: ["Apex", "Test Classes", "Salesforce DX"],
-      icon: "fas fa-code",
-      githubUrl: "#",
-      featured: false,
+        "Documentação completa da minha jornada de aprendizado Salesforce. Projetos práticos, anotações do Trailhead, conceitos aplicados e melhores práticas. Um portfólio transparente do meu crescimento.",
+      category: ["salesforce", "automation"],
+      technologies: ["Salesforce DX", "Apex", "Flow Builder", "Documentation"],
+      icon: "fas fa-graduation-cap",
+      githubUrl: "https://github.com/victorbrandaao/salesforce-learning-journey",
+      featured: true,
+      stats: "📖 Aprendizado contínuo"
     },
     {
       id: 4,
-      title: "Lightning Data Migration Tool",
+      title: "🔧 File Organizer CLI",
       description:
-        "Ferramenta personalizada para migração de dados entre orgs Salesforce com validação automática e rollback.",
-      category: ["salesforce", "tools"],
-      technologies: ["Lightning Web Components", "Apex", "Data Loader API"],
-      icon: "fas fa-database",
-      githubUrl: "#",
-      featured: true,
+        "Ferramenta de linha de comando em C# para organização automática de arquivos. Demonstra habilidades em desenvolvimento backend e automação de processos.",
+      category: ["tools", "backend"],
+      technologies: ["C#", ".NET", "CLI", "File System"],
+      icon: "fas fa-folder-open",
+      githubUrl: "https://github.com/victorbrandaao/FileOrganizerCli",
+      featured: false,
+      stats: "⚡ Automação inteligente"
     },
     {
       id: 5,
-      title: "Process Automation Suite",
+      title: "🕷️ Web Scraping Process",
       description:
-        "Conjunto de automações avançadas incluindo Flows, Process Builder e triggers otimizados para alta performance.",
-      category: ["salesforce", "automation"],
-      technologies: ["Flow Builder", "Apex Triggers", "Process Builder"],
-      icon: "fas fa-cogs",
-      githubUrl: "#",
+        "Sistema automatizado de Web Scraping desenvolvido em C#. Extração inteligente de dados de sites web com tratamento de erros e processamento assíncrono.",
+      category: ["backend", "automation"],
+      technologies: ["C#", "Web Scraping", "HTTP Clients", "Data Processing"],
+      icon: "fas fa-spider",
+      githubUrl: "https://github.com/victorbrandaao/WebScrapingProcess",
       featured: false,
+      stats: "🔍 Extração automática"
     },
     {
       id: 6,
-      title: "Integration Hub",
+      title: "📱 Instagram Follower Tracker",
       description:
-        "Plataforma de integração para conectar Salesforce com sistemas externos usando REST/SOAP APIs e middleware.",
-      category: ["salesforce", "backend"],
-      technologies: ["Apex REST", "External Services", "Named Credentials"],
-      icon: "fas fa-plug",
-      githubUrl: "#",
-      featured: true,
+        "Ferramenta para monitoramento da lista de seguidores do Instagram. Desenvolvida em C# com interface intuitiva e relatórios detalhados de crescimento.",
+      category: ["tools", "backend"],
+      technologies: ["C#", "Instagram API", "Data Analysis", "Windows Forms"],
+      icon: "fas fa-chart-line",
+      githubUrl: "https://github.com/victorbrandaao/InstagramFollowerTracker",
+      featured: false,
+      stats: "📊 Analytics completo"
     },
+    {
+      id: 7,
+      title: "🛡️ Gunbound Game Guard",
+      description:
+        "Sistema de proteção contra trapaças para o jogo Gunbound. Projeto que demonstra conhecimentos avançados em segurança de software e detecção de modificações não autorizadas.",
+      category: ["tools"],
+      technologies: ["C#", "Game Security", "Process Monitoring", "Anti-Cheat"],
+      icon: "fas fa-shield-alt",
+      githubUrl: "https://github.com/victorbrandaao/GunboundGameGuard",
+      featured: false,
+      stats: "🛡️ Segurança avançada"
+    }
   ];
 
   // Render Projects
@@ -83,7 +101,11 @@ document.addEventListener("DOMContentLoaded", () => {
       projectCard.className = 'project-card fade-in-up';
       projectCard.setAttribute('data-category', project.category.join(' '));
 
+      const featuredBadge = project.featured ? '<div class="featured-badge">⭐ Destaque</div>' : '';
+      const statsInfo = project.stats ? `<div class="project-stats">${project.stats}</div>` : '';
+
       projectCard.innerHTML = `
+        ${featuredBadge}
         <div class="project-image">
           <i class="${project.icon}"></i>
         </div>
@@ -93,6 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
           <h3 class="project-title">${project.title}</h3>
           <p class="project-description">${project.description}</p>
+          ${statsInfo}
           <div class="project-links">
             ${project.githubUrl !== '#' ? `<a href="${project.githubUrl}" target="_blank" class="project-link">
               <i class="fab fa-github"></i> GitHub
@@ -419,11 +442,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Console message for developers
   console.log(`
-    🚀 Salesforce Developer Portfolio
-    ⚡ Built with modern web technologies
-    🔧 Optimized for Salesforce professionals
+    🚀 Victor Brandão - Salesforce Developer Portfolio
+    ⚡ Desenvolvedor em aprendizado contínuo
+    🔧 Especializado em Salesforce Platform
+    
+    Projetos em destaque:
+    • Salesforce Arc Pilot (800+ usuários)
+    • Event Management System (100% test coverage)
+    • Salesforce Learning Journey (documentação completa)
     
     Interessado em trabalhar juntos?
-    📧 Envie uma mensagem através do formulário de contato!
+    📧 victorbrandaotech@gmail.com
   `);
 });
