@@ -14,1116 +14,35 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    
-    <style>
-        :root {
-            --bg-primary: #0a0e1a;
-            --bg-secondary: #1a1f2e;
-            --bg-card: rgba(37, 42, 58, 0.8);
-            --bg-glass: rgba(255, 255, 255, 0.1);
-            --text-primary: #ffffff;
-            --text-secondary: #a0a9c0;
-            --text-muted: #6b7280;
-            --accent-primary: #3366ff;
-            --accent-secondary: #00d4aa;
-            --accent-gradient: linear-gradient(135deg, #3366ff 0%, #00d4aa 100%);
-            --border: rgba(45, 55, 72, 0.6);
-            --border-glass: rgba(255, 255, 255, 0.1);
-            --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .light-theme {
-            --bg-primary: #f8fafc;
-            --bg-secondary: #ffffff;
-            --bg-card: rgba(255, 255, 255, 0.9);
-            --bg-glass: rgba(255, 255, 255, 0.25);
-            --text-primary: #1a202c;
-            --text-secondary: #4a5568;
-            --text-muted: #718096;
-            --border: rgba(226, 232, 240, 0.6);
-            --border-glass: rgba(0, 0, 0, 0.1);
-            --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-            transition: var(--transition);
-        }
-
-        /* Particles Background */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: var(--accent-primary);
-            border-radius: 50%;
-            opacity: 0.3;
-            animation: float 15s infinite linear;
-        }
-
-        @keyframes float {
-            0% { 
-                transform: translateY(100vh) translateX(0); 
-                opacity: 0; 
-            }
-            10% { opacity: 0.3; }
-            90% { opacity: 0.3; }
-            100% { 
-                transform: translateY(-100vh) translateX(50px); 
-                opacity: 0; 
-            }
-        }
-
-        /* Scroll Indicator */
-        .scroll-indicator {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--bg-secondary);
-            z-index: 1001;
-        }
-
-        .scroll-progress {
-            height: 100%;
-            background: var(--accent-gradient);
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
-        /* Navigation */
-        .nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: rgba(10, 14, 26, 0.9);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border-glass);
-            transition: var(--transition);
-        }
-
-        .light-theme .nav {
-            background: rgba(248, 250, 252, 0.9);
-        }
-
-        .nav.scrolled {
-            background: rgba(10, 14, 26, 0.95);
-            box-shadow: var(--shadow);
-        }
-
-        .light-theme .nav.scrolled {
-            background: rgba(248, 250, 252, 0.95);
-        }
-
-        .nav-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-logo {
-            font-weight: 800;
-            font-size: 1.3rem;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .nav-logo:hover {
-            transform: scale(1.05);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: var(--transition);
-            position: relative;
-            padding: 0.5rem 1rem;
-            border-radius: 12px;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--accent-primary);
-            background: var(--bg-glass);
-            backdrop-filter: blur(10px);
-        }
-
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .theme-toggle {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--bg-glass);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border-glass);
-            color: var(--text-primary);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            transition: var(--transition);
-        }
-
-        .theme-toggle:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px rgba(51, 102, 255, 0.3);
-        }
-
-        .lang-toggle {
-            padding: 0.5rem 1rem;
-            border-radius: 12px;
-            background: var(--bg-glass);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border-glass);
-            color: var(--text-primary);
-            cursor: pointer;
-            font-weight: 600;
-            transition: var(--transition);
-        }
-
-        .lang-toggle:hover {
-            background: var(--accent-primary);
-            color: white;
-        }
-
-        .mobile-menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: rgba(10, 14, 26, 0.95);
-            backdrop-filter: blur(20px);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 999;
-            transform: translateX(-100%);
-            transition: var(--transition);
-        }
-
-        .mobile-menu.active {
-            transform: translateX(0);
-        }
-
-        .mobile-menu .nav-links {
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .mobile-menu .nav-links a {
-            font-size: 1.5rem;
-            padding: 1rem 2rem;
-        }
-
-        /* Container */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            background: radial-gradient(ellipse at center, rgba(51, 102, 255, 0.1) 0%, transparent 70%);
-        }
-
-        .hero-content {
-            z-index: 10;
-            max-width: 900px;
-            position: relative;
-        }
-
-        .hero-image {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            margin: 0 auto 2rem;
-            position: relative;
-            background: var(--accent-gradient);
-            padding: 6px;
-            transition: var(--transition);
-            box-shadow: 0 0 20px rgba(51, 102, 255, 0.3);
-        }
-
-        .hero-image:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 40px rgba(51, 102, 255, 0.5);
-        }
-
-        .hero-image img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .hero-badge {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background: var(--accent-gradient);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .hero-title {
-            font-size: clamp(3rem, 8vw, 5rem);
-            font-weight: 800;
-            margin-bottom: 1rem;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            line-height: 1.1;
-        }
-
-        .hero-subtitle {
-            font-size: clamp(1.2rem, 4vw, 1.8rem);
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            font-weight: 500;
-        }
-
-        .hero-description {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            margin-bottom: 3rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.7;
-        }
-
-        .hero-stats {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-        }
-
-        .hero-stat {
-            text-align: center;
-        }
-
-        .hero-stat-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            display: block;
-        }
-
-        .hero-stat-label {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .hero-cta {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        /* Buttons */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-            border: none;
-            cursor: pointer;
-            font-family: inherit;
-            font-size: 1rem;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: var(--transition);
-        }
-
-        .btn:hover::before {
-            left: 100%;
-        }
-
-        .btn-primary {
-            background: var(--accent-gradient);
-            color: white;
-            box-shadow: var(--shadow);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .btn-secondary {
-            background: var(--bg-glass);
-            backdrop-filter: blur(10px);
-            color: var(--text-primary);
-            border: 1px solid var(--border-glass);
-        }
-
-        .btn-secondary:hover {
-            background: var(--accent-primary);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .btn-glass {
-            background: var(--bg-glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-glass);
-            color: var(--text-primary);
-        }
-
-        .btn-glass:hover {
-            background: var(--accent-gradient);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        /* Section */
-        .section {
-            padding: 8rem 0;
-            position: relative;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 5rem;
-        }
-
-        .section-badge {
-            display: inline-block;
-            background: var(--bg-glass);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border-glass);
-            color: var(--accent-primary);
-            padding: 0.5rem 1.5rem;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .section-title {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            line-height: 1.2;
-        }
-
-        .section-description {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            max-width: 700px;
-            margin: 0 auto;
-            line-height: 1.7;
-        }
-
-        /* Grid System */
-        .grid {
-            display: grid;
-            gap: 2rem;
-        }
-
-        .grid-2 {
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        }
-
-        .grid-3 {
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        }
-
-        .grid-4 {
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        }
-
-        /* Glass Card */
-        .glass-card {
-            background: var(--bg-glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-glass);
-            border-radius: 20px;
-            padding: 2.5rem;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: var(--accent-gradient);
-            transform: scaleX(0);
-            transition: var(--transition);
-        }
-
-        .glass-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-glass);
-        }
-
-        .glass-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .card-icon {
-            width: 70px;
-            height: 70px;
-            border-radius: 20px;
-            background: var(--accent-gradient);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            color: white;
-            margin-bottom: 2rem;
-            box-shadow: 0 0 20px rgba(51, 102, 255, 0.3);
-        }
-
-        .card-title {
-            font-size: 1.6rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-
-        .card-description {
-            color: var(--text-secondary);
-            line-height: 1.7;
-            margin-bottom: 2rem;
-        }
-
-        .card-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--accent-primary);
-            text-decoration: none;
-            font-weight: 600;
-            transition: var(--transition);
-        }
-
-        .card-link:hover {
-            gap: 1rem;
-            color: var(--accent-secondary);
-        }
-
-        /* Skills Section */
-        .skills-container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .skill-category {
-            margin-bottom: 4rem;
-        }
-
-        .skill-category-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .skill-item {
-            background: var(--bg-glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-glass);
-            border-radius: 15px;
-            padding: 2rem;
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            transition: var(--transition);
-        }
-
-        .skill-item:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-glass);
-        }
-
-        .skill-icon {
-            font-size: 2rem;
-            color: var(--accent-primary);
-            min-width: 50px;
-        }
-
-        .skill-info {
-            flex: 1;
-        }
-
-        .skill-info h4 {
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-
-        .skill-bar {
-            width: 100%;
-            height: 8px;
-            background: var(--border);
-            border-radius: 4px;
-            overflow: hidden;
-            margin-bottom: 0.5rem;
-        }
-
-        .skill-progress {
-            height: 100%;
-            background: var(--accent-gradient);
-            width: 0%;
-            transition: width 1s ease-in-out;
-            border-radius: 4px;
-        }
-
-        .skill-percentage {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        /* Certifications */
-        .certifications {
-            margin-top: 4rem;
-        }
-
-        .certifications-title {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .certifications-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .cert-item {
-            background: var(--bg-glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-glass);
-            border-radius: 15px;
-            padding: 2rem;
-            text-align: center;
-            transition: var(--transition);
-        }
-
-        .cert-item:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-glass);
-        }
-
-        .cert-badge {
-            width: 60px;
-            height: 60px;
-            background: var(--accent-gradient);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: white;
-            margin: 0 auto 1rem;
-        }
-
-        .cert-item h4 {
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-
-        .cert-item p {
-            color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-        }
-
-        .cert-date {
-            color: var(--accent-primary);
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        /* Projects Section */
-        .project-filters {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            padding: 0.5rem 1.5rem;
-            background: var(--bg-glass);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border-glass);
-            border-radius: 25px;
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: var(--transition);
-            font-weight: 500;
-        }
-
-        .filter-btn.active,
-        .filter-btn:hover {
-            background: var(--accent-primary);
-            color: white;
-            border-color: var(--accent-primary);
-        }
-
-        .project-card {
-            background: var(--bg-glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-glass);
-            border-radius: 20px;
-            overflow: hidden;
-            transition: var(--transition);
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .project-card.hidden {
-            opacity: 0;
-            transform: scale(0.8);
-            pointer-events: none;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-glass);
-        }
-
-        .project-image {
-            width: 100%;
-            height: 200px;
-            background: var(--accent-gradient);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: white;
-        }
-
-        .project-content {
-            padding: 2rem;
-        }
-
-        .project-tags {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .project-tag {
-            background: var(--bg-primary);
-            color: var(--accent-primary);
-            padding: 0.25rem 0.75rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .project-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-        }
-
-        .project-description {
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-
-        .project-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .project-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--accent-primary);
-            text-decoration: none;
-            font-weight: 600;
-            transition: var(--transition);
-        }
-
-        .project-link:hover {
-            color: var(--accent-secondary);
-        }
-
-        /* Contact Form */
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-            background: var(--bg-glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-glass);
-            border-radius: 20px;
-            padding: 3rem;
-        }
-
-        .form-group {
-            margin-bottom: 2rem;
-        }
-
-        .form-label {
-            display: block;
-            color: var(--text-primary);
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .form-input,
-        .form-textarea {
-            width: 100%;
-            padding: 1rem;
-            background: var(--bg-primary);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            color: var(--text-primary);
-            font-family: inherit;
-            transition: var(--transition);
-        }
-
-        .form-input:focus,
-        .form-textarea:focus {
-            outline: none;
-            border-color: var(--accent-primary);
-            box-shadow: 0 0 0 3px rgba(51, 102, 255, 0.1);
-        }
-
-        .form-textarea {
-            height: 120px;
-            resize: vertical;
-        }
-
-        .form-submit {
-            width: 100%;
-            background: var(--accent-gradient);
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .form-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border);
-            padding: 4rem 0 2rem;
-            text-align: center;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .social-link {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: var(--bg-glass);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border-glass);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-primary);
-            text-decoration: none;
-            font-size: 1.5rem;
-            transition: var(--transition);
-        }
-
-        .social-link:hover {
-            background: var(--accent-primary);
-            color: white;
-            transform: translateY(-4px);
-        }
-
-        /* Animations */
-        .fade-in-up {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .fade-in-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .fade-in-left {
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .fade-in-left.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .fade-in-right {
-            opacity: 0;
-            transform: translateX(50px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .fade-in-right.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .mobile-menu-toggle {
-                display: block;
-            }
-
-            .hero-stats {
-                gap: 2rem;
-            }
-
-            .hero-cta {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .btn {
-                width: 100%;
-                max-width: 300px;
-                justify-content: center;
-            }
-
-            .grid-2,
-            .grid-3,
-            .grid-4 {
-                grid-template-columns: 1fr;
-            }
-
-            .glass-card,
-            .contact-form {
-                padding: 2rem;
-            }
-
-            .section {
-                padding: 5rem 0;
-            }
-
-            .container {
-                padding: 0 1rem;
-            }
-
-            .skills-grid,
-            .certifications-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .project-filters {
-                justify-content: flex-start;
-                overflow-x: auto;
-                padding-bottom: 1rem;
-            }
-
-            .hero-image {
-                width: 150px;
-                height: 150px;
-            }
-
-            .nav-content {
-                padding: 1rem;
-            }
-
-            .theme-toggle {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-image {
-                width: 120px;
-                height: 120px;
-            }
-
-            .hero-stats {
-                gap: 1rem;
-            }
-
-            .hero-stat-number {
-                font-size: 2rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Particles Background -->
-    <div class="particles" id="particles"></div>
-
-    <!-- Scroll Indicator -->
+    <!-- Scroll Progress Indicator -->
     <div class="scroll-indicator">
-        <div class="scroll-progress" id="scrollProgress"></div>
+        <div class="scroll-progress"></div>
     </div>
 
+    <!-- Particles Background -->
+    <div class="particles"></div>
+
     <!-- Navigation -->
-    <nav class="nav" id="navbar">
+    <nav class="nav">
         <div class="nav-content">
-            <a href="#home" class="nav-logo">Victor Brandão</a>
+            <a href="#" class="nav-logo">Victor Brandão</a>
             
             <ul class="nav-links">
-                <li><a href="#home" class="nav-link active">Início</a></li>
+                <li><a href="#home" class="nav-link">Início</a></li>
                 <li><a href="#about" class="nav-link">Sobre</a></li>
                 <li><a href="#skills" class="nav-link">Habilidades</a></li>
                 <li><a href="#projects" class="nav-link">Projetos</a></li>
-                <li><a href="#experience" class="nav-link">Experiência</a></li>
                 <li><a href="#contact" class="nav-link">Contato</a></li>
             </ul>
 
             <div class="nav-actions">
-                <button class="lang-toggle" id="langToggle">EN</button>
-                <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+                <button class="theme-toggle" aria-label="Toggle theme">
                     <i class="fas fa-moon"></i>
                 </button>
-                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <button class="mobile-menu-toggle">
                     <i class="fas fa-bars"></i>
                 </button>
             </div>
@@ -1131,13 +50,12 @@
     </nav>
 
     <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu">
         <ul class="nav-links">
             <li><a href="#home" class="nav-link">Início</a></li>
             <li><a href="#about" class="nav-link">Sobre</a></li>
             <li><a href="#skills" class="nav-link">Habilidades</a></li>
             <li><a href="#projects" class="nav-link">Projetos</a></li>
-            <li><a href="#experience" class="nav-link">Experiência</a></li>
             <li><a href="#contact" class="nav-link">Contato</a></li>
         </ul>
     </div>
@@ -1145,46 +63,43 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="container">
-            <div class="hero-content">
-                <div class="hero-image fade-in-up">
-                    <img src="https://github.com/victorbrandaao.png" alt="Victor Brandão" width="200" height="200">
-                    <div class="hero-badge">Disponível</div>
+            <div class="hero-content fade-in-up">
+                <div class="hero-image">
+                    <img src="https://github.com/victorbrandaao.png" alt="Victor Brandão" onerror="this.src='data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><circle cx=\'50\' cy=\'50\' r=\'40\' fill=\'%233366ff\'/><text x=\'50\' y=\'60\' text-anchor=\'middle\' fill=\'white\' font-size=\'30\' font-family=\'Arial\'>VB</text></svg>'">
+                    <div class="hero-badge">🚀 Disponível</div>
                 </div>
                 
-                <h1 class="hero-title fade-in-up">Victor Brandão</h1>
-                <p class="hero-subtitle fade-in-up">Salesforce Developer & Software Engineer</p>
-                <p class="hero-description fade-in-up">
-                    Especialista em desenvolvimento Salesforce com foco em Apex, Lightning Web Components e automações. 
-                    Apaixonado por criar soluções eficientes que transformam processos de negócio e impulsionam resultados.
+                <h1 class="hero-title">Victor Brandão</h1>
+                <h2 class="hero-subtitle">Salesforce Developer & Software Engineer</h2>
+                <p class="hero-description">
+                    Desenvolvedor especializado em Salesforce com experiência em Apex, Lightning Web Components, 
+                    integração de sistemas e desenvolvimento full-stack. Apaixonado por criar soluções inovadoras 
+                    que impulsionam o crescimento dos negócios.
                 </p>
 
-                <div class="hero-stats fade-in-up">
+                <div class="hero-stats">
                     <div class="hero-stat">
-                        <span class="hero-stat-number" data-count="50">0</span>
-                        <span class="hero-stat-label">Projetos</span>
+                        <span class="hero-stat-number">3+</span>
+                        <span class="hero-stat-label">Anos de Experiência</span>
                     </div>
                     <div class="hero-stat">
-                        <span class="hero-stat-number" data-count="5">0</span>
+                        <span class="hero-stat-number">20+</span>
+                        <span class="hero-stat-label">Projetos Entregues</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-number">5+</span>
                         <span class="hero-stat-label">Certificações</span>
-                    </div>
-                    <div class="hero-stat">
-                        <span class="hero-stat-number" data-count="3">0</span>
-                        <span class="hero-stat-label">Anos Exp.</span>
                     </div>
                 </div>
 
-                <div class="hero-cta fade-in-up">
-                    <a href="#projects" class="btn btn-primary">
-                        <i class="fas fa-code"></i>
-                        <span>Ver Projetos</span>
+                <div class="hero-cta">
+                    <a href="#contact" class="btn btn-primary">
+                        <i class="fas fa-envelope"></i>
+                        Entre em Contato
                     </a>
-                    <a href="#contact" class="btn btn-secondary">
-                        <i class="fas fa-paper-plane"></i>
-                        <span>Entre em Contato</span>
-                    </a>
-                    <a href="curriculo/index.html" class="btn btn-glass">
+                    <a href="curriculo/index.html" class="btn btn-secondary">
                         <i class="fas fa-file-pdf"></i>
-                        <span>Currículo</span>
+                        Ver Currículo
                     </a>
                 </div>
             </div>
@@ -1194,57 +109,35 @@
     <!-- About Section -->
     <section id="about" class="section">
         <div class="container">
-            <div class="section-header">
-                <span class="section-badge fade-in-up">Sobre Mim</span>
-                <h2 class="section-title fade-in-up">Desenvolvedor Apaixonado por Tecnologia</h2>
-                <p class="section-description fade-in-up">
-                    Com mais de 3 anos de experiência em desenvolvimento de software, especializo-me em criar soluções 
-                    robustas e escaláveis na plataforma Salesforce, sempre focando em entregar valor real para o negócio.
+            <div class="section-header fade-in-up">
+                <span class="section-badge">Sobre Mim</span>
+                <h2 class="section-title">Desenvolvedor Salesforce Especialista</h2>
+                <p class="section-description">
+                    Com mais de 3 anos de experiência em desenvolvimento Salesforce, 
+                    especializo-me em criar soluções robustas e escaláveis para empresas de todos os tamanhos.
                 </p>
             </div>
 
             <div class="grid grid-2">
                 <div class="glass-card fade-in-left">
                     <div class="card-icon">
-                        <i class="fas fa-rocket"></i>
+                        <i class="fab fa-salesforce"></i>
                     </div>
-                    <h3 class="card-title">Inovação Constante</h3>
+                    <h3 class="card-title">Salesforce Expert</h3>
                     <p class="card-description">
-                        Sempre em busca das melhores práticas e tecnologias mais recentes para criar soluções 
-                        que fazem a diferença no dia a dia dos usuários.
+                        Especialista em Apex, Lightning Web Components, Flow Builder, e integrações complexas. 
+                        Experiência com Sales Cloud, Service Cloud e Community Cloud.
                     </p>
                 </div>
 
                 <div class="glass-card fade-in-right">
-                    <div class="card-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3 class="card-title">Foco no Cliente</h3>
-                    <p class="card-description">
-                        Cada projeto é desenvolvido pensando na experiência do usuário final, 
-                        garantindo interfaces intuitivas e processos otimizados.
-                    </p>
-                </div>
-
-                <div class="glass-card fade-in-left">
                     <div class="card-icon">
                         <i class="fas fa-code"></i>
                     </div>
-                    <h3 class="card-title">Código Limpo</h3>
+                    <h3 class="card-title">Full Stack Developer</h3>
                     <p class="card-description">
-                        Acredito em código bem estruturado, documentado e testado. 
-                        Qualidade é fundamental para manutenibilidade e escalabilidade.
-                    </p>
-                </div>
-
-                <div class="glass-card fade-in-right">
-                    <div class="card-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <h3 class="card-title">Aprendizado Contínuo</h3>
-                    <p class="card-description">
-                        A tecnologia evolui rapidamente, e eu evoluo junto. Sempre estudando 
-                        e me certificando nas mais novas ferramentas e metodologias.
+                        Desenvolvimento completo desde backend até frontend, utilizando tecnologias modernas 
+                        como JavaScript, React, Node.js, C# e integrações com APIs REST/SOAP.
                     </p>
                 </div>
             </div>
@@ -1254,27 +147,27 @@
     <!-- Skills Section -->
     <section id="skills" class="section">
         <div class="container">
-            <div class="section-header">
-                <span class="section-badge fade-in-up">Habilidades</span>
-                <h2 class="section-title fade-in-up">Tecnologias & Expertises</h2>
-                <p class="section-description fade-in-up">
-                    Domínio técnico em diversas tecnologias, com foco especial no ecossistema Salesforce 
-                    e desenvolvimento backend robusto.
+            <div class="section-header fade-in-up">
+                <span class="section-badge">Habilidades</span>
+                <h2 class="section-title">Tecnologias e Ferramentas</h2>
+                <p class="section-description">
+                    Conjunto abrangente de habilidades técnicas focadas no ecossistema Salesforce e desenvolvimento moderno.
                 </p>
             </div>
 
-            <div class="skills-container fade-in-up">
-                <div class="skill-category">
-                    <h3 class="skill-category-title">Salesforce Platform</h3>
+            <div class="skills-container">
+                <!-- Salesforce Skills -->
+                <div class="skill-category fade-in-up">
+                    <h3 class="skill-category-title">🏛️ Salesforce Platform</h3>
                     <div class="skills-grid">
                         <div class="skill-item">
                             <div class="skill-icon">
                                 <i class="fab fa-salesforce"></i>
                             </div>
                             <div class="skill-info">
-                                <h4>Apex</h4>
+                                <h4>Apex & SOQL</h4>
                                 <div class="skill-bar">
-                                    <div class="skill-progress" data-progress="95"></div>
+                                    <div class="skill-progress" data-width="95"></div>
                                 </div>
                                 <span class="skill-percentage">95%</span>
                             </div>
@@ -1287,7 +180,7 @@
                             <div class="skill-info">
                                 <h4>Lightning Web Components</h4>
                                 <div class="skill-bar">
-                                    <div class="skill-progress" data-progress="90"></div>
+                                    <div class="skill-progress" data-width="90"></div>
                                 </div>
                                 <span class="skill-percentage">90%</span>
                             </div>
@@ -1295,25 +188,12 @@
 
                         <div class="skill-item">
                             <div class="skill-icon">
-                                <i class="fas fa-database"></i>
+                                <i class="fas fa-stream"></i>
                             </div>
                             <div class="skill-info">
-                                <h4>SOQL/SOSL</h4>
+                                <h4>Flow Builder & Process Builder</h4>
                                 <div class="skill-bar">
-                                    <div class="skill-progress" data-progress="92"></div>
-                                </div>
-                                <span class="skill-percentage">92%</span>
-                            </div>
-                        </div>
-
-                        <div class="skill-item">
-                            <div class="skill-icon">
-                                <i class="fas fa-cogs"></i>
-                            </div>
-                            <div class="skill-info">
-                                <h4>Process Automation</h4>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-progress="88"></div>
+                                    <div class="skill-progress" data-width="88"></div>
                                 </div>
                                 <span class="skill-percentage">88%</span>
                             </div>
@@ -1321,17 +201,18 @@
                     </div>
                 </div>
 
-                <div class="skill-category">
-                    <h3 class="skill-category-title">Backend Development</h3>
+                <!-- Backend Skills -->
+                <div class="skill-category fade-in-up">
+                    <h3 class="skill-category-title">⚙️ Backend Development</h3>
                     <div class="skills-grid">
                         <div class="skill-item">
                             <div class="skill-icon">
-                                <i class="fab fa-microsoft"></i>
+                                <i class="fab fa-js-square"></i>
                             </div>
                             <div class="skill-info">
-                                <h4>C# / .NET</h4>
+                                <h4>JavaScript & Node.js</h4>
                                 <div class="skill-bar">
-                                    <div class="skill-progress" data-progress="85"></div>
+                                    <div class="skill-progress" data-width="85"></div>
                                 </div>
                                 <span class="skill-percentage">85%</span>
                             </div>
@@ -1339,25 +220,12 @@
 
                         <div class="skill-item">
                             <div class="skill-icon">
-                                <i class="fab fa-js"></i>
+                                <i class="fas fa-hashtag"></i>
                             </div>
                             <div class="skill-info">
-                                <h4>JavaScript</h4>
+                                <h4>C# & .NET</h4>
                                 <div class="skill-bar">
-                                    <div class="skill-progress" data-progress="88"></div>
-                                </div>
-                                <span class="skill-percentage">88%</span>
-                            </div>
-                        </div>
-
-                        <div class="skill-item">
-                            <div class="skill-icon">
-                                <i class="fab fa-python"></i>
-                            </div>
-                            <div class="skill-info">
-                                <h4>Python</h4>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-progress="80"></div>
+                                    <div class="skill-progress" data-width="80"></div>
                                 </div>
                                 <span class="skill-percentage">80%</span>
                             </div>
@@ -1365,69 +233,57 @@
 
                         <div class="skill-item">
                             <div class="skill-icon">
-                                <i class="fas fa-server"></i>
+                                <i class="fas fa-exchange-alt"></i>
                             </div>
                             <div class="skill-info">
-                                <h4>PostgreSQL</h4>
+                                <h4>REST/SOAP APIs</h4>
                                 <div class="skill-bar">
-                                    <div class="skill-progress" data-progress="82"></div>
+                                    <div class="skill-progress" data-width="92"></div>
                                 </div>
-                                <span class="skill-percentage">82%</span>
+                                <span class="skill-percentage">92%</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="skill-category">
-                    <h3 class="skill-category-title">Tools & Automation</h3>
+                <!-- Frontend Skills -->
+                <div class="skill-category fade-in-up">
+                    <h3 class="skill-category-title">🎨 Frontend Development</h3>
                     <div class="skills-grid">
                         <div class="skill-item">
                             <div class="skill-icon">
-                                <i class="fas fa-robot"></i>
+                                <i class="fab fa-react"></i>
                             </div>
                             <div class="skill-info">
-                                <h4>N8N</h4>
+                                <h4>React & Next.js</h4>
                                 <div class="skill-bar">
-                                    <div class="skill-progress" data-progress="90"></div>
+                                    <div class="skill-progress" data-width="82"></div>
                                 </div>
-                                <span class="skill-percentage">90%</span>
+                                <span class="skill-percentage">82%</span>
                             </div>
                         </div>
 
                         <div class="skill-item">
                             <div class="skill-icon">
-                                <i class="fab fa-git-alt"></i>
+                                <i class="fab fa-html5"></i>
                             </div>
                             <div class="skill-info">
-                                <h4>Git/GitHub</h4>
+                                <h4>HTML5 & CSS3</h4>
                                 <div class="skill-bar">
-                                    <div class="skill-progress" data-progress="92"></div>
+                                    <div class="skill-progress" data-width="88"></div>
                                 </div>
-                                <span class="skill-percentage">92%</span>
+                                <span class="skill-percentage">88%</span>
                             </div>
                         </div>
 
                         <div class="skill-item">
                             <div class="skill-icon">
-                                <i class="fas fa-cloud"></i>
+                                <i class="fab fa-bootstrap"></i>
                             </div>
                             <div class="skill-info">
-                                <h4>REST APIs</h4>
+                                <h4>Bootstrap & Tailwind</h4>
                                 <div class="skill-bar">
-                                    <div class="skill-progress" data-progress="87"></div>
-                                </div>
-                                <span class="skill-percentage">87%</span>
-                            </div>
-                        </div>
-
-                        <div class="skill-item">
-                            <div class="skill-icon">
-                                <i class="fas fa-database"></i>
-                            </div>
-                            <div class="skill-info">
-                                <h4>Supabase</h4>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-progress="85"></div>
+                                    <div class="skill-progress" data-width="85"></div>
                                 </div>
                                 <span class="skill-percentage">85%</span>
                             </div>
@@ -1438,31 +294,33 @@
 
             <!-- Certifications -->
             <div class="certifications fade-in-up">
-                <h3 class="certifications-title">Certificações</h3>
+                <h3 class="certifications-title">🏆 Certificações Salesforce</h3>
                 <div class="certifications-grid">
                     <div class="cert-item">
                         <div class="cert-badge">
                             <i class="fab fa-salesforce"></i>
                         </div>
                         <h4>Platform Developer I</h4>
-                        <p>Salesforce</p>
-                        <span class="cert-date">2024</span>
-                    </div>
-                    <div class="cert-item">
-                        <div class="cert-badge">
-                            <i class="fab fa-salesforce"></i>
-                        </div>
-                        <h4>Administrator</h4>
-                        <p>Salesforce</p>
+                        <p>Salesforce Certified</p>
                         <span class="cert-date">2023</span>
                     </div>
+
                     <div class="cert-item">
                         <div class="cert-badge">
-                            <i class="fas fa-cloud"></i>
+                            <i class="fas fa-users"></i>
                         </div>
-                        <h4>Cloud Practitioner</h4>
-                        <p>AWS</p>
-                        <span class="cert-date">2024</span>
+                        <h4>Administrator</h4>
+                        <p>Salesforce Certified</p>
+                        <span class="cert-date">2022</span>
+                    </div>
+
+                    <div class="cert-item">
+                        <div class="cert-badge">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4>Sales Cloud Consultant</h4>
+                        <p>Salesforce Certified</p>
+                        <span class="cert-date">2023</span>
                     </div>
                 </div>
             </div>
@@ -1472,210 +330,26 @@
     <!-- Projects Section -->
     <section id="projects" class="section">
         <div class="container">
-            <div class="section-header">
-                <span class="section-badge fade-in-up">Projetos</span>
-                <h2 class="section-title fade-in-up">Portfólio em Destaque</h2>
-                <p class="section-description fade-in-up">
-                    Seleção dos meus projetos mais relevantes, demonstrando expertise técnica e soluções inovadoras.
+            <div class="section-header fade-in-up">
+                <span class="section-badge">Projetos</span>
+                <h2 class="section-title">Meus Trabalhos</h2>
+                <p class="section-description">
+                    Seleção de projetos que demonstram minha experiência em desenvolvimento Salesforce e tecnologias modernas.
                 </p>
             </div>
 
+            <!-- Project Filters -->
             <div class="project-filters fade-in-up">
                 <button class="filter-btn active" data-filter="all">Todos</button>
                 <button class="filter-btn" data-filter="salesforce">Salesforce</button>
+                <button class="filter-btn" data-filter="tools">Ferramentas</button>
                 <button class="filter-btn" data-filter="backend">Backend</button>
                 <button class="filter-btn" data-filter="automation">Automação</button>
-                <button class="filter-btn" data-filter="tools">Ferramentas</button>
             </div>
 
-            <div class="grid grid-3">
-                <div class="project-card fade-in-up" data-category="salesforce tools">
-                    <div class="project-image">
-                        <i class="fas fa-rocket"></i>
-                    </div>
-                    <div class="project-content">
-                        <div class="project-tags">
-                            <span class="project-tag">Chrome Extension</span>
-                            <span class="project-tag">JavaScript</span>
-                            <span class="project-tag">Salesforce</span>
-                        </div>
-                        <h3 class="project-title">Salesforce Arc Pilot</h3>
-                        <p class="project-description">
-                            Extensão completa para Chrome que revoluciona o workflow de desenvolvedores Salesforce. 
-                            Organização inteligente de orgs, busca avançada e sincronização na nuvem.
-                        </p>
-                        <div class="project-links">
-                            <a href="https://github.com/victorbrandaao/SalesforceArcPilot" target="_blank" class="project-link">
-                                <i class="fab fa-github"></i>
-                                GitHub
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fas fa-external-link-alt"></i>
-                                Demo
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card fade-in-up" data-category="salesforce">
-                    <div class="project-image">
-                        <i class="fas fa-calendar-alt"></i>
-                    </div>
-                    <div class="project-content">
-                        <div class="project-tags">
-                            <span class="project-tag">Apex</span>
-                            <span class="project-tag">LWC</span>
-                            <span class="project-tag">Salesforce</span>
-                        </div>
-                        <h3 class="project-title">Event Management System</h3>
-                        <p class="project-description">
-                            Sistema completo de gerenciamento de eventos construído na plataforma Salesforce. 
-                            Inclui automações, relatórios personalizados e integração com APIs externas.
-                        </p>
-                        <div class="project-links">
-                            <a href="https://github.com/victorbrandaao/EventManagementSystem" target="_blank" class="project-link">
-                                <i class="fab fa-github"></i>
-                                GitHub
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card fade-in-up" data-category="backend tools">
-                    <div class="project-image">
-                        <i class="fas fa-folder-open"></i>
-                    </div>
-                    <div class="project-content">
-                        <div class="project-tags">
-                            <span class="project-tag">C#</span>
-                            <span class="project-tag">CLI</span>
-                            <span class="project-tag">Productivity</span>
-                        </div>
-                        <h3 class="project-title">File Organizer CLI</h3>
-                        <p class="project-description">
-                            Ferramenta CLI em C# para organização automática de arquivos por tipo, data e critérios personalizados. 
-                            Aumenta a produtividade do desenvolvedor.
-                        </p>
-                        <div class="project-links">
-                            <a href="https://github.com/victorbrandaao/FileOrganizerCli" target="_blank" class="project-link">
-                                <i class="fab fa-github"></i>
-                                GitHub
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card fade-in-up" data-category="backend automation">
-                    <div class="project-image">
-                        <i class="fas fa-spider"></i>
-                    </div>
-                    <div class="project-content">
-                        <div class="project-tags">
-                            <span class="project-tag">C#</span>
-                            <span class="project-tag">Web Scraping</span>
-                            <span class="project-tag">Automation</span>
-                        </div>
-                        <h3 class="project-title">Web Scraping Process</h3>
-                        <p class="project-description">
-                            Sistema robusto de web scraping em C# para extração automatizada de dados de sites. 
-                            Inclui tratamento de erros e processamento assíncrono.
-                        </p>
-                        <div class="project-links">
-                            <a href="https://github.com/victorbrandaao/WebScrapingProcess" target="_blank" class="project-link">
-                                <i class="fab fa-github"></i>
-                                GitHub
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card fade-in-up" data-category="backend">
-                    <div class="project-image">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <div class="project-content">
-                        <div class="project-tags">
-                            <span class="project-tag">C#</span>
-                            <span class="project-tag">Security</span>
-                            <span class="project-tag">Game Dev</span>
-                        </div>
-                        <h3 class="project-title">Gunbound Game Guard</h3>
-                        <p class="project-description">
-                            Sistema anti-cheat desenvolvido em C# para proteger o jogo Gunbound contra modificações 
-                            não autorizadas e garantir fair play.
-                        </p>
-                        <div class="project-links">
-                            <a href="https://github.com/victorbrandaao/GunboundGameGuard" target="_blank" class="project-link">
-                                <i class="fab fa-github"></i>
-                                GitHub
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card fade-in-up" data-category="salesforce">
-                    <div class="project-image">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <div class="project-content">
-                        <div class="project-tags">
-                            <span class="project-tag">Apex</span>
-                            <span class="project-tag">Lightning</span>
-                            <span class="project-tag">Learning</span>
-                        </div>
-                        <h3 class="project-title">Salesforce Learning Journey</h3>
-                        <p class="project-description">
-                            Repositório documentando minha jornada de aprendizado em Salesforce, 
-                            com códigos Apex, Lightning Components e melhores práticas.
-                        </p>
-                        <div class="project-links">
-                            <a href="https://github.com/victorbrandaao/salesforce-learning-journey" target="_blank" class="project-link">
-                                <i class="fab fa-github"></i>
-                                GitHub
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience" class="section">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-badge fade-in-up">Experiência</span>
-                <h2 class="section-title fade-in-up">Trajetória Profissional</h2>
-                <p class="section-description fade-in-up">
-                    Minha jornada como desenvolvedor de software, com foco em crescimento contínuo e entrega de valor.
-                </p>
-            </div>
-
-            <div class="timeline fade-in-up">
-                <div class="timeline-item">
-                    <div class="timeline-date">Fevereiro 2025 - Presente</div>
-                    <h3 class="timeline-title">Software Engineer</h3>
-                    <div class="timeline-company">
-                        <a href="https://processtec.com.br" target="_blank" style="color: var(--accent-primary); text-decoration: none;">
-                            Processtec.com.br
-                        </a>
-                    </div>
-                    <div class="timeline-description">
-                        Desenvolvimento de soluções backend robustas e automações inteligentes utilizando N8N, 
-                        Supabase e PostgreSQL. Implementação de integrações com APIs do WhatsApp para automação 
-                        de processos de comunicação e CRM.
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-date">Julho 2021 - Abril 2023</div>
-                    <h3 class="timeline-title">Assistente de TI</h3>
-                    <div class="timeline-company">Secretaria de Educação do Recife</div>
-                    <div class="timeline-description">
-                        Responsável pela análise de dados educacionais e integração com sistemas legados. 
-                        Desenvolvimento de relatórios automatizados e suporte técnico para infraestrutura educacional.
-                    </div>
-                </div>
+            <!-- Projects Grid -->
+            <div class="grid grid-3" id="projects-grid">
+                <!-- Projects will be dynamically inserted here by JavaScript -->
             </div>
         </div>
     </section>
@@ -1683,41 +357,63 @@
     <!-- Contact Section -->
     <section id="contact" class="section">
         <div class="container">
-            <div class="section-header">
-                <span class="section-badge fade-in-up">Contato</span>
-                <h2 class="section-title fade-in-up">Vamos Conversar?</h2>
-                <p class="section-description fade-in-up">
-                    Estou sempre aberto a novas oportunidades e projetos interessantes. Entre em contato!
+            <div class="section-header fade-in-up">
+                <span class="section-badge">Contato</span>
+                <h2 class="section-title">Vamos Trabalhar Juntos</h2>
+                <p class="section-description">
+                    Pronto para discutir seu próximo projeto Salesforce? Entre em contato comigo!
                 </p>
             </div>
 
-            <div class="grid grid-3" style="margin-bottom: 4rem;">
-                <div class="glass-card fade-in-up">
-                    <div class="card-icon">
-                        <i class="fab fa-github"></i>
+            <div class="contact-form fade-in-up">
+                <form id="contact-form">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Nome</label>
+                        <input type="text" id="name" name="name" class="form-input" required>
                     </div>
-                    <h3 class="card-title">GitHub</h3>
-                    <p class="card-description">Confira meus projetos e contribuições open source</p>
-                    <a href="https://github.com/victorbrandaao" class="card-link" target="_blank">
-                        Visitar perfil
-                        <i class="fas fa-external-link-alt"></i>
-                    </a>
-                </div>
 
-                <div class="glass-card fade-in-up">
-                    <div class="card-icon">
-                        <i class="fab fa-linkedin"></i>
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" id="email" name="email" class="form-input" required>
                     </div>
-                    <h3 class="card-title">LinkedIn</h3>
-                    <p class="card-description">Conecte-se comigo para networking profissional</p>
-                    <a href="https://linkedin.com/in/victorbrandaao" class="card-link" target="_blank">
-                        Conectar
-                        <i class="fas fa-external-link-alt"></i>
-                    </a>
-                </div>
 
-                <div class="glass-card fade-in-up">
-                    <div class="card-icon">
-                        <i class="fas fa-envelope"></i>
+                    <div class="form-group">
+                        <label for="subject" class="form-label">Assunto</label>
+                        <input type="text" id="subject" name="subject" class="form-input" required>
                     </div>
-                    <h3 
+
+                    <div class="form-group">
+                        <label for="message" class="form-label">Mensagem</label>
+                        <textarea id="message" name="message" class="form-textarea" required></textarea>
+                    </div>
+
+                    <button type="submit" class="form-submit">
+                        <i class="fas fa-paper-plane"></i>
+                        Enviar Mensagem
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="social-links">
+                <a href="https://github.com/victorbrandaao" target="_blank" class="social-link">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://linkedin.com/in/victorbrandaao" target="_blank" class="social-link">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:victor@exemplo.com" class="social-link">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+            <p>&copy; 2024 Victor Brandão. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
