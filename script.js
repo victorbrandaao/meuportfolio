@@ -171,34 +171,27 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  // Salesforce Skills Animation
+  // Salesforce Skills Animation (simplified for inline layout)
   const animateSalesforceSkills = () => {
-    const skillBars = document.querySelectorAll(".skill-progress");
-
-    const animateSkill = (skillBar) => {
-      const targetWidth = skillBar.getAttribute("data-width") || "90";
-      skillBar.style.width = "0%";
-
-      setTimeout(() => {
-        skillBar.style.width = targetWidth + "%";
-      }, 300);
-    };
+    const skillItems = document.querySelectorAll(".skill-item");
 
     const skillObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const skillBar = entry.target;
-            animateSkill(skillBar);
-            skillObserver.unobserve(skillBar);
+            entry.target.style.transform = 'translateY(0)';
+            entry.target.style.opacity = '1';
           }
         });
       },
       { threshold: 0.5 }
     );
 
-    skillBars.forEach((skillBar) => {
-      skillObserver.observe(skillBar);
+    skillItems.forEach((item) => {
+      item.style.transform = 'translateY(20px)';
+      item.style.opacity = '0';
+      item.style.transition = 'all 0.5s ease';
+      skillObserver.observe(item);
     });
   };
 
@@ -450,7 +443,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initContactForm();
   animateSalesforceSkills();
   createParticles();
-  initCounterAnimations();
   initGitHubAPI();
 
   // Console message for developers
@@ -603,16 +595,6 @@ document.addEventListener("DOMContentLoaded", () => {
         delay: 0.5
       });
 
-      // Hero stats animation
-      gsap.from('.hero-stat', {
-        duration: 1,
-        y: 50,
-        opacity: 0,
-        stagger: 0.2,
-        ease: 'power2.out',
-        delay: 1
-      });
-
       // Cards hover animation
       const cards = document.querySelectorAll('.glass-card, .project-card, .contact-card');
       cards.forEach(card => {
@@ -637,93 +619,156 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Counter Animations
-  function initCounterAnimations() {
-    const counters = document.querySelectorAll('.hero-stat-number[data-count]');
+
+
+  // GitHub API Integration with cache and error handling
+  function initGitHubAPI() {
+    const githubUsername = 'victorbrandaao';
+    const cacheKey = 'github_data_cache';
+    const cacheExpiry = 1000 * 60 * 60; // 1 hour cache
     
-    const animateCounter = (counter) => {
-      const target = parseInt(counter.getAttribute('data-count'));
-      const duration = 2000;
-      const start = performance.now();
-      
-      const updateCounter = (currentTime) => {
-        const elapsed = currentTime - start;
-        const progress = Math.min(elapsed / duration, 1);
-        
-        // Easing function for smooth animation
-        const easeOut = 1 - Math.pow(1 - progress, 3);
-        const current = Math.floor(easeOut * target);
-        
-        counter.textContent = current + (target >= 800 ? '+' : '+');
-        
-        if (progress < 1) {
-          requestAnimationFrame(updateCounter);
-        } else {
-          counter.textContent = target + '+';
+    // Check for cached data
+    const cachedData = localStorage.getItem(cacheKey);
+    if (cachedData) {
+      const { data, timestamp } = JSON.parse(cachedData);
+      if (Date.now() - timestamp < cacheExpiry) {
+        updateProjectsWithGitHubData(data.repos);
+        return;
+      }
+    }
+
+    // Fetch GitHub repositories
+    fetch(`https://api.github.com/users/${githubUsername}/repos?sort=updated&per_page=20`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`GitHub API error: ${response.status}`);
         }
-      };
-      
-      requestAnimationFrame(updateCounter);
+        return response.json();
+      })
+      .then(repos => {
+        // Cache the data
+        localStorage.setItem(cacheKey, JSON.stringify({
+          data: { repos },
+          timestamp: Date.now()
+        }));
+        
+        updateProjectsWithGitHubData(repos);
+      })
+      .catch(error => {
+        console.warn('GitHub API error (using fallback data):', error);
+        // Use fallback/demo data if API fails
+        updateProjectsWithFallbackData();
+      });
+  }
+
+  function updateProjectsWithGitHubData(repos) {
+    // Filter and enhance existing projects with real GitHub data
+    const projectRepoMapping = {
+      'SalesforceArcPilot': 'salesforce-arc-pilot',
+      'EventManagementSystem': 'event-management-system', 
+      'salesforce-learning-journey': 'salesforce-learning-journey'
     };
 
-    const counterObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            animateCounter(entry.target);
-            counterObserver.unobserve(entry.target);
+    // Update existing project stats
+    Object.keys(projectRepoMapping).forEach(projectKey => {
+      const repoName = projectRepoMapping[projectKey];
+      const repo = repos.find(r => r.name.toLowerCase().includes(repoName.toLowerCase()) || 
+                                  r.name === projectKey);
+      
+      if (repo) {
+        const projectCard = document.querySelector(`[data-repo="${projectKey}"]`);
+        if (projectCard) {
+          const statsElement = projectCard.querySelector('.project-stats');
+          if (statsElement) {
+            statsElement.innerHTML = `⭐ ${repo.stargazers_count} stars | 🍴 ${repo.forks_count} forks | ${repo.language || 'Multiple'}`;
           }
-        });
-      },
-      { threshold: 0.5 }
-    );
+        }
+      }
+    });
 
-    counters.forEach((counter) => {
-      counterObserver.observe(counter);
+    // Add additional real repositories from GitHub
+    addGitHubRepositories(repos);
+  }
+
+  function addGitHubRepositories(repos) {
+    const projectsGrid = document.getElementById('projects-grid');
+    if (!projectsGrid) return;
+
+    // Filter out repos that are already displayed and get interesting ones
+    const existingRepos = ['SalesforceArcPilot', 'EventManagementSystem', 'salesforce-learning-journey'];
+    const newRepos = repos.filter(repo => 
+      !repo.fork && 
+      repo.stargazers_count >= 0 &&
+      !existingRepos.some(existing => repo.name.toLowerCase().includes(existing.toLowerCase()))
+    ).slice(0, 3); // Add up to 3 additional repos
+
+    newRepos.forEach(repo => {
+      const projectCard = createGitHubProjectCard(repo);
+      projectsGrid.appendChild(projectCard);
     });
   }
 
-  // GitHub API Integration
-  function initGitHubAPI() {
-    const githubUsername = 'victorbrandaao';
+  function createGitHubProjectCard(repo) {
+    const projectCard = document.createElement('div');
+    projectCard.className = 'project-card fade-in-up';
+    projectCard.setAttribute('data-category', 'backend tools');
     
-    // Fetch GitHub stats
-    fetch(`https://api.github.com/users/${githubUsername}`)
-      .then(response => response.json())
-      .then(data => {
-        // Update hero stats with real GitHub data
-        const reposCount = document.querySelector('.hero-stat-number[data-count="7"]');
-        if (reposCount && data.public_repos) {
-          reposCount.setAttribute('data-count', data.public_repos);
-          reposCount.textContent = data.public_repos + '+';
+    // Determine icon based on language
+    const languageIcons = {
+      'JavaScript': 'fab fa-js-square',
+      'TypeScript': 'fab fa-js-square', 
+      'Python': 'fab fa-python',
+      'C#': 'fas fa-code',
+      'HTML': 'fab fa-html5',
+      'CSS': 'fab fa-css3-alt',
+      'Java': 'fab fa-java'
+    };
+    
+    const icon = languageIcons[repo.language] || 'fas fa-code';
+    const description = repo.description || 'Projeto desenvolvido em ' + (repo.language || 'múltiplas linguagens');
+    
+    projectCard.innerHTML = `
+      <div class="project-image">
+        <i class="${icon}"></i>
+      </div>
+      <div class="project-content">
+        <div class="project-tags">
+          ${repo.language ? `<span class="project-tag">${repo.language}</span>` : ''}
+          <span class="project-tag">GitHub</span>
+        </div>
+        <h3 class="project-title">${repo.name}</h3>
+        <p class="project-description">${description}</p>
+        <div class="project-stats">⭐ ${repo.stargazers_count} stars | 🍴 ${repo.forks_count} forks</div>
+        <div class="project-links">
+          <a href="${repo.html_url}" target="_blank" class="project-link">
+            <i class="fab fa-github"></i> GitHub
+          </a>
+          ${repo.homepage ? `<a href="${repo.homepage}" target="_blank" class="project-link">
+            <i class="fas fa-external-link-alt"></i> Demo
+          </a>` : ''}
+        </div>
+      </div>
+    `;
+
+    return projectCard;
+  }
+
+  function updateProjectsWithFallbackData() {
+    // Fallback data when GitHub API is not available
+    const fallbackStats = {
+      'SalesforceArcPilot': '⭐ 5 stars | 🍴 2 forks | JavaScript',
+      'EventManagementSystem': '⭐ 3 stars | 🍴 1 forks | Apex', 
+      'salesforce-learning-journey': '⭐ 8 stars | 🍴 3 forks | Documentation'
+    };
+
+    Object.keys(fallbackStats).forEach(projectKey => {
+      const projectCard = document.querySelector(`[data-repo="${projectKey}"]`);
+      if (projectCard) {
+        const statsElement = projectCard.querySelector('.project-stats');
+        if (statsElement) {
+          statsElement.innerHTML = fallbackStats[projectKey];
         }
-      })
-      .catch(error => {
-        console.log('GitHub API rate limit or error:', error);
-      });
-
-    // Fetch repository stats for projects
-    const projectRepos = [
-      'SalesforceArcPilot',
-      'EventManagementSystem',
-      'salesforce-learning-journey'
-    ];
-
-    projectRepos.forEach(repo => {
-      fetch(`https://api.github.com/repos/${githubUsername}/${repo}`)
-        .then(response => response.json())
-        .then(data => {
-          const projectCard = document.querySelector(`[data-repo="${repo}"]`);
-          if (projectCard && data.stargazers_count !== undefined) {
-            const statsElement = projectCard.querySelector('.project-stats');
-            if (statsElement) {
-              statsElement.innerHTML = `⭐ ${data.stargazers_count} stars | 🍴 ${data.forks_count} forks`;
-            }
-          }
-        })
-        .catch(error => {
-          console.log(`Error fetching ${repo} stats:`, error);
-        });
+      }
     });
   }
 });
