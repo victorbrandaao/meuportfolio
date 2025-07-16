@@ -1,5 +1,10 @@
-// Salesforce Portfolio Scripts - Atualizado com projetos reais
+// Modern Salesforce Portfolio - Enhanced with External Libraries
 document.addEventListener("DOMContentLoaded", () => {
+  // Initialize loading screen
+  initLoadingScreen();
+  
+  // Initialize external libraries
+  initExternalLibraries();
   // Salesforce Projects Data - Projetos reais do GitHub
   const salesforceProjects = [
     {
@@ -100,6 +105,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const projectCard = document.createElement('div');
       projectCard.className = 'project-card fade-in-up';
       projectCard.setAttribute('data-category', project.category.join(' '));
+      
+      // Add data-repo attribute for GitHub API integration
+      if (project.githubUrl && project.githubUrl.includes('github.com')) {
+        const repoName = project.githubUrl.split('/').pop();
+        projectCard.setAttribute('data-repo', repoName);
+      }
 
       const featuredBadge = project.featured ? '<div class="featured-badge">⭐ Destaque</div>' : '';
       const statsInfo = project.stats ? `<div class="project-stats">${project.stats}</div>` : '';
@@ -439,6 +450,8 @@ document.addEventListener("DOMContentLoaded", () => {
   initContactForm();
   animateSalesforceSkills();
   createParticles();
+  initCounterAnimations();
+  initGitHubAPI();
 
   // Console message for developers
   console.log(`
@@ -454,4 +467,263 @@ document.addEventListener("DOMContentLoaded", () => {
     Interessado em trabalhar juntos?
     📧 victorbrandaotech@gmail.com
   `);
+
+  // Loading Screen Functions
+  function initLoadingScreen() {
+    const loadingScreen = document.getElementById('loading-screen');
+    const loadingBar = document.querySelector('.loading-bar');
+    
+    if (!loadingScreen) return;
+
+    // Simulate loading progress
+    let progress = 0;
+    const interval = setInterval(() => {
+      progress += Math.random() * 15;
+      if (progress > 100) progress = 100;
+      
+      if (loadingBar) {
+        loadingBar.style.width = progress + '%';
+      }
+      
+      if (progress >= 100) {
+        clearInterval(interval);
+        setTimeout(() => {
+          loadingScreen.classList.add('hidden');
+          // Initialize AOS after loading
+          if (typeof AOS !== 'undefined') {
+            AOS.refresh();
+          }
+        }, 500);
+      }
+    }, 100);
+  }
+
+  // External Libraries Initialization
+  function initExternalLibraries() {
+    // Initialize AOS (Animate On Scroll)
+    if (typeof AOS !== 'undefined') {
+      AOS.init({
+        duration: 800,
+        once: true,
+        offset: 100,
+        easing: 'ease-out-cubic'
+      });
+    }
+
+    // Initialize Typed.js for hero subtitle
+    if (typeof Typed !== 'undefined') {
+      const typedElement = document.querySelector('.typed-text');
+      if (typedElement) {
+        new Typed('.typed-text', {
+          strings: [
+            'Salesforce Developer em Formação',
+            'Apex & Lightning Web Components',
+            'Criador do Salesforce Arc Pilot',
+            'Apaixonado por Tecnologia'
+          ],
+          typeSpeed: 50,
+          backSpeed: 30,
+          backDelay: 2000,
+          loop: true,
+          showCursor: false
+        });
+      }
+
+      // Loading screen typed text
+      const typedLoading = document.querySelector('.typed-loading');
+      if (typedLoading) {
+        new Typed('.typed-loading', {
+          strings: [
+            'Carregando portfolio...',
+            'Preparando experiência...',
+            'Quase pronto!'
+          ],
+          typeSpeed: 50,
+          backSpeed: 30,
+          backDelay: 1000,
+          loop: true,
+          showCursor: false
+        });
+      }
+    }
+
+    // Initialize Particles.js
+    if (typeof particlesJS !== 'undefined') {
+      particlesJS('particles', {
+        particles: {
+          number: { value: 80, density: { enable: true, value_area: 800 } },
+          color: { value: '#0070f3' },
+          shape: { type: 'circle' },
+          opacity: { value: 0.3, random: true },
+          size: { value: 3, random: true },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: '#0070f3',
+            opacity: 0.2,
+            width: 1
+          },
+          move: {
+            enable: true,
+            speed: 2,
+            direction: 'none',
+            random: false,
+            straight: false,
+            out_mode: 'out',
+            bounce: false
+          }
+        },
+        interactivity: {
+          detect_on: 'canvas',
+          events: {
+            onhover: { enable: true, mode: 'repulse' },
+            onclick: { enable: true, mode: 'push' },
+            resize: true
+          },
+          modes: {
+            grab: { distance: 140, line_linked: { opacity: 1 } },
+            bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 },
+            repulse: { distance: 200, duration: 0.4 },
+            push: { particles_nb: 4 },
+            remove: { particles_nb: 2 }
+          }
+        },
+        retina_detect: true
+      });
+    }
+
+    // Initialize GSAP animations
+    if (typeof gsap !== 'undefined') {
+      // Hero image animation
+      gsap.from('.hero-image img', {
+        duration: 1.5,
+        scale: 0.8,
+        opacity: 0,
+        ease: 'back.out(1.7)',
+        delay: 0.5
+      });
+
+      // Hero stats animation
+      gsap.from('.hero-stat', {
+        duration: 1,
+        y: 50,
+        opacity: 0,
+        stagger: 0.2,
+        ease: 'power2.out',
+        delay: 1
+      });
+
+      // Cards hover animation
+      const cards = document.querySelectorAll('.glass-card, .project-card, .contact-card');
+      cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          gsap.to(card, {
+            duration: 0.3,
+            y: -10,
+            scale: 1.02,
+            ease: 'power2.out'
+          });
+        });
+
+        card.addEventListener('mouseleave', () => {
+          gsap.to(card, {
+            duration: 0.3,
+            y: 0,
+            scale: 1,
+            ease: 'power2.out'
+          });
+        });
+      });
+    }
+  }
+
+  // Counter Animations
+  function initCounterAnimations() {
+    const counters = document.querySelectorAll('.hero-stat-number[data-count]');
+    
+    const animateCounter = (counter) => {
+      const target = parseInt(counter.getAttribute('data-count'));
+      const duration = 2000;
+      const start = performance.now();
+      
+      const updateCounter = (currentTime) => {
+        const elapsed = currentTime - start;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Easing function for smooth animation
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        const current = Math.floor(easeOut * target);
+        
+        counter.textContent = current + (target >= 800 ? '+' : '+');
+        
+        if (progress < 1) {
+          requestAnimationFrame(updateCounter);
+        } else {
+          counter.textContent = target + '+';
+        }
+      };
+      
+      requestAnimationFrame(updateCounter);
+    };
+
+    const counterObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animateCounter(entry.target);
+            counterObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    counters.forEach((counter) => {
+      counterObserver.observe(counter);
+    });
+  }
+
+  // GitHub API Integration
+  function initGitHubAPI() {
+    const githubUsername = 'victorbrandaao';
+    
+    // Fetch GitHub stats
+    fetch(`https://api.github.com/users/${githubUsername}`)
+      .then(response => response.json())
+      .then(data => {
+        // Update hero stats with real GitHub data
+        const reposCount = document.querySelector('.hero-stat-number[data-count="7"]');
+        if (reposCount && data.public_repos) {
+          reposCount.setAttribute('data-count', data.public_repos);
+          reposCount.textContent = data.public_repos + '+';
+        }
+      })
+      .catch(error => {
+        console.log('GitHub API rate limit or error:', error);
+      });
+
+    // Fetch repository stats for projects
+    const projectRepos = [
+      'SalesforceArcPilot',
+      'EventManagementSystem',
+      'salesforce-learning-journey'
+    ];
+
+    projectRepos.forEach(repo => {
+      fetch(`https://api.github.com/repos/${githubUsername}/${repo}`)
+        .then(response => response.json())
+        .then(data => {
+          const projectCard = document.querySelector(`[data-repo="${repo}"]`);
+          if (projectCard && data.stargazers_count !== undefined) {
+            const statsElement = projectCard.querySelector('.project-stats');
+            if (statsElement) {
+              statsElement.innerHTML = `⭐ ${data.stargazers_count} stars | 🍴 ${data.forks_count} forks`;
+            }
+          }
+        })
+        .catch(error => {
+          console.log(`Error fetching ${repo} stats:`, error);
+        });
+    });
+  }
 });
