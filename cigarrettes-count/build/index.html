@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CigarroTrack - Controle Inteligente</title>
+
+    <!-- Favicons -->
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚭</text></svg>"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚭</text></svg>"
+    />
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#1a1a1a" />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- External Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+  </head>
+
+  <body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+      <div class="loading-content">
+        <div class="app-logo">🚭</div>
+        <div class="loading-spinner"></div>
+        <p>Carregando CigarroTrack...</p>
+      </div>
+    </div>
+
+    <!-- Main App -->
+    <div class="app-container">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-content">
+          <div class="app-title">
+            <span class="app-icon">🚭</span>
+            <h1>CigarroTrack</h1>
+            <span class="version">v2.0</span>
+          </div>
+          <div class="header-actions">
+            <button
+              class="header-btn"
+              id="addCigarettesBtn"
+              title="Adicionar Cigarros"
+            >
+              <span>➕</span>
+            </button>
+            <button class="header-btn" id="settingsBtn" title="Configurações">
+              <span>⚙️</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- User Switcher -->
+      <div class="user-switcher">
+        <div class="switcher-container">
+          <button class="user-option active" data-user="victor">
+            <div class="user-avatar">👨🏻</div>
+            <div class="user-info">
+              <span class="user-name">Victor</span>
+              <span class="user-status" id="victorStatus">0 hoje</span>
+            </div>
+          </button>
+          <button class="user-option" data-user="kalyne">
+            <div class="user-avatar">👩🏻</div>
+            <div class="user-info">
+              <span class="user-name">Kalyne</span>
+              <span class="user-status" id="kalyneStatus">0 hoje</span>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Dashboard -->
+      <main class="dashboard">
+        <!-- Current Stock -->
+        <section class="stock-section">
+          <div class="stock-card">
+            <div class="stock-indicator" id="stockIndicator"></div>
+            <div class="stock-header">
+              <h3>📦 Estoque Atual</h3>
+              <button class="quick-btn" id="quickAddStock">+ Adicionar</button>
+            </div>
+            <div class="stock-display">
+              <div class="stock-number" id="currentStock">0</div>
+              <div class="stock-label">cigarros disponíveis</div>
+            </div>
+            <div class="stock-value">
+              Valor: <span id="stockValue">R$ 0,00</span>
+            </div>
+            <div class="progress-bar" style="margin-top: 12px">
+              <div
+                class="progress-fill"
+                id="stockProgress"
+                style="width: 0%"
+              ></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Today's Summary -->
+        <section class="today-section">
+          <div class="today-card">
+            <div class="today-header">
+              <h3>📅 Hoje</h3>
+              <span class="today-date" id="todayDate"></span>
+            </div>
+            <div class="today-stats">
+              <div class="stat-item">
+                <div class="stat-icon danger">🚬</div>
+                <div class="stat-content">
+                  <div class="stat-number" id="todaySmoked">0</div>
+                  <div class="stat-label">Fumados</div>
+                </div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-icon warning">💸</div>
+                <div class="stat-content">
+                  <div class="stat-number" id="todayWasted">R$ 0,00</div>
+                  <div class="stat-label">Gasto</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Quick Actions -->
+        <section class="actions-section">
+          <div class="action-grid">
+            <button class="action-card buy-action" id="buyPackBtn">
+              <div class="action-icon">🛒</div>
+              <div class="action-content">
+                <div class="action-title">Comprar Carteira</div>
+                <div class="action-subtitle">+20 cigarros • R$ 14,00</div>
+              </div>
+            </button>
+
+            <button class="action-card smoke-action" id="smokeBtn">
+              <div class="action-icon">🚬</div>
+              <div class="action-content">
+                <div class="action-title">Fumar Cigarro</div>
+                <div class="action-subtitle">-1 cigarro • R$ 0,70</div>
+              </div>
+            </button>
+          </div>
+        </section>
+
+        <!-- Statistics Overview -->
+        <section class="stats-overview">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-header">
+                <span class="stat-icon">📊</span>
+                <span class="stat-title">Total Gasto</span>
+              </div>
+              <div class="stat-value danger" id="totalSpent">R$ 0,00</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-header">
+                <span class="stat-icon">📦</span>
+                <span class="stat-title">Carteiras</span>
+              </div>
+              <div class="stat-value" id="totalPacks">0</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-header">
+                <span class="stat-icon">📈</span>
+                <span class="stat-title">Média/Dia</span>
+              </div>
+              <div class="stat-value" id="avgPerDay">0</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-header">
+                <span class="stat-icon">⏱️</span>
+                <span class="stat-title">Dias</span>
+              </div>
+              <div class="stat-value" id="totalDays">0</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Weekly Chart -->
+        <section class="chart-section">
+          <div class="chart-card">
+            <div class="chart-header">
+              <h3>📈 Consumo Semanal</h3>
+              <button class="chart-toggle" id="chartToggle">📊</button>
+            </div>
+            <div class="chart-container">
+              <canvas id="weeklyChart"></canvas>
+            </div>
+          </div>
+        </section>
+
+        <!-- Footer Actions -->
+        <section class="footer-actions">
+          <button class="footer-btn" id="historyBtn">
+            <span>📋</span> Histórico
+          </button>
+          <button class="footer-btn" id="resetBtn">
+            <span>🔄</span> Reset
+          </button>
+          <button class="footer-btn" id="exportBtn">
+            <span>📤</span> Exportar
+          </button>
+        </section>
+      </main>
+    </div>
+
+    <!-- Modals -->
+
+    <!-- Add Cigarettes Modal -->
+    <div id="addCigarettesModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>➕ Adicionar Cigarros</h3>
+          <button class="close-btn" data-modal="addCigarettesModal">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group">
+            <label for="cigaretteCount">Quantidade de cigarros:</label>
+            <div class="counter-input">
+              <button class="counter-btn" id="decreaseCount">-</button>
+              <input
+                type="number"
+                id="cigaretteCount"
+                value="20"
+                min="1"
+                max="200"
+              />
+              <button class="counter-btn" id="increaseCount">+</button>
+            </div>
+          </div>
+          <div class="input-group">
+            <label for="cigaretteCost">Valor total pago:</label>
+            <div class="money-input">
+              <span class="currency">R$</span>
+              <input
+                type="number"
+                id="cigaretteCost"
+                value="14.00"
+                step="0.01"
+                min="0"
+              />
+            </div>
+          </div>
+          <div class="modal-actions">
+            <button class="modal-btn cancel" data-modal="addCigarettesModal">
+              Cancelar
+            </button>
+            <button class="modal-btn confirm" id="confirmAddCigarettes">
+              Adicionar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>⚙️ Configurações</h3>
+          <button class="close-btn" data-modal="settingsModal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="setting-group">
+            <label for="packPrice">Preço da carteira (R$):</label>
+            <input type="number" id="packPrice" step="0.01" min="0" />
+          </div>
+          <div class="setting-group">
+            <label for="packSize">Cigarros por carteira:</label>
+            <input type="number" id="packSize" min="1" max="50" />
+          </div>
+          <div class="modal-actions">
+            <button class="modal-btn cancel" data-modal="settingsModal">
+              Cancelar
+            </button>
+            <button class="modal-btn confirm" id="saveSettings">Salvar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- History Modal -->
+    <div id="historyModal" class="modal">
+      <div class="modal-content wide">
+        <div class="modal-header">
+          <h3>📋 Histórico Detalhado</h3>
+          <button class="close-btn" data-modal="historyModal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div id="historyContent">
+            <!-- History content will be populated by JavaScript -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmModal" class="modal">
+      <div class="modal-content confirm-modal">
+        <div class="modal-header">
+          <h3>⚠️ Confirmação</h3>
+        </div>
+        <div class="modal-body">
+          <p id="confirmMessage">Tem certeza que deseja continuar?</p>
+          <div class="modal-actions">
+            <button class="modal-btn cancel" id="confirmCancel">
+              Cancelar
+            </button>
+            <button class="modal-btn confirm danger" id="confirmYes">
+              Confirmar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Floating Action Button -->
+    <button class="fab" id="quickSmokeBtn" title="Fumar rápido">🚬</button>
+
+    <script src="script.js"></script>
+  </body>
+</html>
