@@ -51,30 +51,53 @@ class CigaretteTracker {
   }
 
   async init() {
-    await this.showLoading();
-    this.loadData();
-    this.setupEventListeners();
-    this.setupGestures();
-    this.updateAllDisplays();
-    this.initChart();
-    this.hideLoading();
-    this.setupPWA();
-    this.updateTodayDate();
+    console.log("🚀 Iniciando CigarroTrack...");
+    try {
+      await this.showLoading();
+      console.log("📊 Carregando dados...");
+      this.loadData();
+      console.log("🎯 Configurando eventos...");
+      this.setupEventListeners();
+      console.log("👆 Configurando gestos...");
+      this.setupGestures();
+      console.log("🔄 Atualizando displays...");
+      this.updateAllDisplays();
+      console.log("📈 Inicializando gráfico...");
+      this.initChart();
+      console.log("📱 Configurando PWA...");
+      this.setupPWA();
+      console.log("📅 Atualizando data...");
+      this.updateTodayDate();
+      console.log("✅ CigarroTrack iniciado com sucesso!");
+      this.hideLoading();
+    } catch (error) {
+      console.error("❌ Erro na inicialização:", error);
+      // Em caso de erro, ainda assim esconde o loading
+      this.hideLoading();
+    }
   }
 
   showLoading() {
     return new Promise((resolve) => {
-      setTimeout(resolve, 1000);
+      console.log("💫 Mostrando tela de loading...");
+      setTimeout(resolve, 500); // Reduzido de 1000 para 500ms
     });
   }
 
   hideLoading() {
-    const loadingScreen = document.getElementById("loadingScreen");
-    if (loadingScreen) {
-      loadingScreen.classList.add("hidden");
-      setTimeout(() => {
-        loadingScreen.style.display = "none";
-      }, 500);
+    try {
+      const loadingScreen = document.getElementById("loadingScreen");
+      if (loadingScreen) {
+        console.log("🚫 Escondendo tela de loading...");
+        loadingScreen.classList.add("hidden");
+        setTimeout(() => {
+          loadingScreen.style.display = "none";
+        }, 500);
+      } else {
+        console.log("⚠️ Loading screen não encontrada");
+      }
+    } catch (error) {
+      console.error("❌ Erro ao esconder loading:", error);
     }
   }
 
@@ -133,71 +156,75 @@ class CigaretteTracker {
   }
 
   setupEventListeners() {
-    // User switching
-    document.querySelectorAll(".user-option").forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        const user = e.currentTarget.dataset.user;
-        this.switchUser(user);
+    try {
+      // User switching
+      document.querySelectorAll(".user-option").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          const user = e.currentTarget.dataset.user;
+          this.switchUser(user);
+        });
       });
-    });
 
-    // Header actions
-    const addCigarettesBtn = document.getElementById("addCigarettesBtn");
-    const settingsBtn = document.getElementById("settingsBtn");
-    const quickAddStock = document.getElementById("quickAddStock");
+      // Header actions
+      const addCigarettesBtn = document.getElementById("addCigarettesBtn");
+      const settingsBtn = document.getElementById("settingsBtn");
+      const quickAddStock = document.getElementById("quickAddStock");
 
-    if (addCigarettesBtn) {
-      addCigarettesBtn.addEventListener("click", () =>
-        this.openAddCigarettesModal()
-      );
+      if (addCigarettesBtn) {
+        addCigarettesBtn.addEventListener("click", () =>
+          this.openAddCigarettesModal()
+        );
+      }
+
+      if (settingsBtn) {
+        settingsBtn.addEventListener("click", () => this.openSettingsModal());
+      }
+
+      if (quickAddStock) {
+        quickAddStock.addEventListener("click", () =>
+          this.openAddCigarettesModal()
+        );
+      }
+
+      // Action buttons
+      const buyPackBtn = document.getElementById("buyPackBtn");
+      const smokeBtn = document.getElementById("smokeBtn");
+      const quickSmokeBtn = document.getElementById("quickSmokeBtn");
+
+      if (buyPackBtn) {
+        buyPackBtn.addEventListener("click", () => this.buyPack());
+      }
+
+      if (smokeBtn) {
+        smokeBtn.addEventListener("click", () => this.smokeCigarette());
+      }
+
+      if (quickSmokeBtn) {
+        quickSmokeBtn.addEventListener("click", () => this.smokeCigarette());
+      }
+
+      // Footer actions
+      const historyBtn = document.getElementById("historyBtn");
+      const resetBtn = document.getElementById("resetBtn");
+      const exportBtn = document.getElementById("exportBtn");
+
+      if (historyBtn) {
+        historyBtn.addEventListener("click", () => this.openHistory());
+      }
+
+      if (resetBtn) {
+        resetBtn.addEventListener("click", () => this.showResetConfirmation());
+      }
+
+      if (exportBtn) {
+        exportBtn.addEventListener("click", () => this.exportData());
+      }
+
+      // Modal interactions
+      this.setupModalEvents();
+    } catch (error) {
+      console.error("Erro ao configurar event listeners:", error);
     }
-
-    if (settingsBtn) {
-      settingsBtn.addEventListener("click", () => this.openSettingsModal());
-    }
-
-    if (quickAddStock) {
-      quickAddStock.addEventListener("click", () =>
-        this.openAddCigarettesModal()
-      );
-    }
-
-    // Action buttons
-    const buyPackBtn = document.getElementById("buyPackBtn");
-    const smokeBtn = document.getElementById("smokeBtn");
-    const quickSmokeBtn = document.getElementById("quickSmokeBtn");
-
-    if (buyPackBtn) {
-      buyPackBtn.addEventListener("click", () => this.buyPack());
-    }
-
-    if (smokeBtn) {
-      smokeBtn.addEventListener("click", () => this.smokeCigarette());
-    }
-
-    if (quickSmokeBtn) {
-      quickSmokeBtn.addEventListener("click", () => this.smokeCigarette());
-    }
-
-    // Footer actions
-    const historyBtn = document.getElementById("historyBtn");
-    const resetBtn = document.getElementById("resetBtn");
-    const exportBtn = document.getElementById("exportBtn");
-
-    if (historyBtn) {
-      historyBtn.addEventListener("click", () => this.openHistory());
-    }
-
-    if (resetBtn) {
-      resetBtn.addEventListener("click", () => this.showResetConfirmation());
-    }
-
-    if (exportBtn) {
-      exportBtn.addEventListener("click", () => this.exportData());
-    }
-
-    // Modal interactions
-    this.setupModalEvents();
   }
 
   setupModalEvents() {
@@ -662,48 +689,55 @@ class CigaretteTracker {
   }
 
   initChart() {
-    const ctx = document.getElementById("weeklyChart");
-    if (!ctx) return;
+    try {
+      const ctx = document.getElementById("weeklyChart");
+      if (!ctx) {
+        console.log("Chart element not found, skipping chart initialization");
+        return;
+      }
 
-    this.chart = new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"],
-        datasets: [
-          {
-            label: this.currentUser === "victor" ? "Victor" : "Kalyne",
-            data: [0, 0, 0, 0, 0, 0, 0],
-            backgroundColor:
-              this.currentUser === "victor" ? "#ff6b35" : "#00d4aa",
-            borderRadius: 8,
-            borderSkipped: false,
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { display: false },
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            ticks: {
-              stepSize: 1,
-              color: "#666666",
+      this.chart = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"],
+          datasets: [
+            {
+              label: this.currentUser === "victor" ? "Victor" : "Kalyne",
+              data: [0, 0, 0, 0, 0, 0, 0],
+              backgroundColor:
+                this.currentUser === "victor" ? "#ff6b35" : "#00d4aa",
+              borderRadius: 8,
+              borderSkipped: false,
             },
-            grid: { color: "#333333" },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
           },
-          x: {
-            ticks: { color: "#666666" },
-            grid: { display: false },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                stepSize: 1,
+                color: "#666666",
+              },
+              grid: { color: "#333333" },
+            },
+            x: {
+              ticks: { color: "#666666" },
+              grid: { display: false },
+            },
           },
         },
-      },
-    });
+      });
 
-    this.updateChart();
+      this.updateChart();
+    } catch (error) {
+      console.error("Erro ao inicializar gráfico:", error);
+    }
   }
 
   updateChart() {
@@ -999,7 +1033,13 @@ class CigaretteTracker {
 
 // Initialize app
 document.addEventListener("DOMContentLoaded", () => {
-  window.tracker = new CigaretteTracker();
+  console.log("🚀 DOM carregado, criando CigaretteTracker...");
+  try {
+    window.tracker = new CigaretteTracker();
+    console.log("✅ CigaretteTracker criado com sucesso!");
+  } catch (error) {
+    console.error("❌ Erro ao criar CigaretteTracker:", error);
+  }
 });
 
 // Handle page visibility

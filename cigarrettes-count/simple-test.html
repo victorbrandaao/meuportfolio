@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CigarroTrack - Teste Simples</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+  </head>
+
+  <body>
+    <!-- Main App (sem loading screen) -->
+    <div class="app-container">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-content">
+          <div class="app-title">
+            <span class="app-icon">🚭</span>
+            <h1>CigarroTrack</h1>
+            <span class="version">v2.0</span>
+          </div>
+          <div class="header-actions">
+            <button
+              class="header-btn"
+              id="addCigarettesBtn"
+              title="Adicionar Cigarros"
+            >
+              <span>➕</span>
+            </button>
+            <button class="header-btn" id="settingsBtn" title="Configurações">
+              <span>⚙️</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- User Switcher -->
+      <div class="user-switcher">
+        <div class="switcher-container">
+          <button class="user-option active" data-user="victor">
+            <div class="user-avatar">👨🏻</div>
+            <div class="user-info">
+              <span class="user-name">Victor</span>
+              <span class="user-status" id="victorStatus">0 hoje</span>
+            </div>
+          </button>
+          <button class="user-option" data-user="kalyne">
+            <div class="user-avatar">👩🏻</div>
+            <div class="user-info">
+              <span class="user-name">Kalyne</span>
+              <span class="user-status" id="kalyneStatus">0 hoje</span>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Teste simples -->
+      <main class="dashboard">
+        <div
+          style="
+            padding: 20px;
+            background: var(--bg-card);
+            margin: 20px;
+            border-radius: 12px;
+          "
+        >
+          <h2>Teste de Funcionamento</h2>
+          <div id="testResult">Carregando...</div>
+          <button
+            onclick="testFunction()"
+            style="
+              margin-top: 10px;
+              padding: 10px;
+              background: var(--primary);
+              color: white;
+              border: none;
+              border-radius: 8px;
+            "
+          >
+            Testar Função
+          </button>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      function testFunction() {
+        document.getElementById("testResult").innerHTML = `
+          <p>✅ JavaScript funcionando!</p>
+          <p>Data: ${new Date().toLocaleString()}</p>
+          <p>LocalStorage: ${
+            typeof localStorage !== "undefined" ? "OK" : "Erro"
+          }</p>
+        `;
+      }
+
+      // Executar teste automaticamente
+      document.addEventListener("DOMContentLoaded", testFunction);
+    </script>
+  </body>
+</html>

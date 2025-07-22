@@ -1,11 +1,11 @@
 const CACHE_NAME = "cigarette-tracker-v1.0.0";
-const BASE_PATH = "/cigarrettes-count";
+const BASE_PATH = "";
 const urlsToCache = [
-  `${BASE_PATH}/`,
-  `${BASE_PATH}/index.html`,
-  `${BASE_PATH}/style.css`,
-  `${BASE_PATH}/script.js`,
-  `${BASE_PATH}/manifest.json`,
+  "./",
+  "./index.html",
+  "./style.css",
+  "./script.js",
+  "./manifest.json",
   "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap",
   "https://cdn.jsdelivr.net/npm/chart.js",
   "https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js",
