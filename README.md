@@ -12,8 +12,9 @@ DevOps Engineer apaixonado por automação e infraestrutura como código. Atualm
 ## 🛠️ Stack Tecnológica
 
 ### DevOps & Infrastructure
+
 - Docker & Containers
-- Kubernetes  
+- Kubernetes
 - CI/CD Pipelines
 - Infrastructure as Code
 - Terraform
@@ -22,6 +23,7 @@ DevOps Engineer apaixonado por automação e infraestrutura como código. Atualm
 - Git & GitOps
 
 ### Monitoring & Observability
+
 - Prometheus
 - Grafana
 - ELK Stack
@@ -30,6 +32,7 @@ DevOps Engineer apaixonado por automação e infraestrutura como código. Atualm
 - Alerting Systems
 
 ### Development & Automation
+
 - Python
 - JavaScript/Node.js
 - Bash Scripting
@@ -41,19 +44,25 @@ DevOps Engineer apaixonado por automação e infraestrutura como código. Atualm
 ## 🚀 Projetos Destacados
 
 ### 🔧 Salesforce Arc Pilot
+
 Extensão Chrome que revoluciona o workflow de desenvolvedores
+
 - **800+ usuários ativos**
 - **4.9/5 estrelas de avaliação**
 - Organização inteligente e automação de tarefas
 
 ### 🎯 Event Management System
+
 Sistema completo de gerenciamento de eventos
+
 - **100% test coverage**
 - Automação completa de processos
 - Arquitetura escalável
 
 ### 📚 Open Source Projects
+
 Diversos projetos em C#, automação e desenvolvimento web
+
 - File Organizer CLI
 - Web Scraping Tools
 - Instagram Analytics
@@ -105,12 +114,14 @@ npx serve .
 ## 🎯 Objetivos Acadêmicos
 
 ### Engenharia de Software (Em andamento)
+
 - Fundamentos sólidos em desenvolvimento
 - Arquitetura de software
 - Metodologias ágeis
 - Qualidade de software
 
 ### Engenharia de Plataforma - César School
+
 - Infraestrutura como código
 - Container orchestration
 - Site reliability engineering
@@ -121,4 +132,4 @@ npx serve .
 
 **Desenvolvido com ❤️ e foco em DevOps**
 
-*"Automatizar para inovar, monitorar para melhorar, escalar para crescer"*
+_"Automatizar para inovar, monitorar para melhorar, escalar para crescer"_
