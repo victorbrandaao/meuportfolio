@@ -251,6 +251,47 @@ section h2 {
     text-align: center;
 }
 
+.education-highlight {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.education-item {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem;
+    background: var(--bg-card);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--primary);
+}
+
+.education-item i {
+    font-size: 2rem;
+    color: var(--primary);
+    min-width: 2rem;
+}
+
+.education-item h4 {
+    margin: 0 0 0.5rem 0;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.education-item p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    text-align: left;
+}
+
 .stats {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));

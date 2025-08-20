@@ -27,8 +27,8 @@ plugins:
   - jekyll-seo-tag
 
 # SEO settings
-title: "Victor Brandão - Salesforce Developer"
-description: "Portfólio de Victor Brandão, Salesforce Developer. Projetos com Apex, Lightning Web Components e desenvolvimento web."
+title: "Victor Brandão - DevOps Engineer"
+description: "Portfólio de Victor Brandão, DevOps Engineer. Estudante de Engenharia de Software e especialização em Engenharia de Plataforma no César School."
 author: "Victor Brandão"
 lang: "pt-BR"
 
