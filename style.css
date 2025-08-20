@@ -598,6 +598,10 @@ section h2 {
   .contact-links {
     grid-template-columns: 1fr;
   }
+
+  .education-highlight {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 480px) {
@@ -619,7 +623,13 @@ section h2 {
 
   .project-card,
   .skill-category,
-  .stat-item {
+  .stat-item,
+  .education-item {
     padding: 1.5rem;
+  }
+
+  .education-highlight {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 }
