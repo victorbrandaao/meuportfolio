@@ -3,325 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Victor Brandão - Salesforce Developer | Portfolio Moderno</title>
-    <meta name="description" content="Portfolio moderno de Victor Brandão, Salesforce Developer em formação. Projetos com Apex, Lightning Web Components e tecnologias modernas.">
+    <title>Victor Brandão - Salesforce Developer</title>
+    <meta name="description" content="Portfólio de Victor Brandão, Salesforce Developer. Projetos com Apex, Lightning Web Components e desenvolvimento web.">
     
-    <!-- Preconnect for performance -->
+    <!-- Fontes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- Modern Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- AOS Animation Library -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
-    <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="style.css">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+    <link rel="stylesheet" href="style-simple.css">
 </head>
 
 <body>
-    <!-- Loading Screen -->
-    <div id="loading-screen" class="loading-screen">
-        <div class="loading-content">
-            <div class="loading-logo">
-                <i class="fab fa-salesforce"></i>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <span>Victor Brandão</span>
             </div>
-            <div class="loading-text">
-                <span class="typed-loading"></span>
-            </div>
-            <div class="loading-progress">
-                <div class="loading-bar"></div>
-            </div>
-        </div>
-        <div class="loading-particles"></div>
-    </div>
-
-    <!-- Scroll Progress Indicator -->
-    <div class="scroll-progress"></div>
-
-    <!-- Particles Background -->
-    <div class="particles"></div>
-
-    <!-- Navigation -->
-    <nav class="nav" id="nav">
-        <div class="nav-container">
-            <a href="#home" class="nav-logo">
-                <span class="logo-text">VB</span>
-                <span class="logo-subtitle">Developer</span>
-            </a>
-            
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="#home" class="nav-link active">
-                        <i class="fas fa-home"></i>
-                        <span>Início</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#about" class="nav-link">
-                        <i class="fas fa-user"></i>
-                        <span>Sobre</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#skills" class="nav-link">
-                        <i class="fas fa-code"></i>
-                        <span>Skills</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#projects" class="nav-link">
-                        <i class="fas fa-laptop-code"></i>
-                        <span>Projetos</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#contact" class="nav-link">
-                        <i class="fas fa-envelope"></i>
-                        <span>Contato</span>
-                    </a>
-                </li>
+            <ul class="nav-links">
+                <li><a href="#about">Sobre</a></li>
+                <li><a href="#projects">Projetos</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contato</a></li>
             </ul>
-
-            <div class="nav-controls">
-                <button class="theme-toggle" aria-label="Alternar tema">
-                    <i class="fas fa-moon"></i>
-                </button>
-                
-                <button class="mobile-menu-toggle" aria-label="Menu mobile">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
-        </div>
-
-        <!-- Mobile Menu -->
-        <div class="mobile-menu">
-            <a href="#home" class="nav-link">Início</a>
-            <a href="#about" class="nav-link">Sobre</a>
-            <a href="#skills" class="nav-link">Skills</a>
-            <a href="#projects" class="nav-link">Projetos</a>
-            <a href="#contact" class="nav-link">Contato</a>
-        </div>
-    </nav>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
 
     <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-background">
-            <div class="hero-particles"></div>
-        </div>
-        
+    <section class="hero">
         <div class="container">
-            <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
-                <div class="hero-image" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="image-wrapper">
-                        <img src="https://github.com/victorbrandaao.png" alt="Victor Brandão" onerror="this.src='data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><text y=\'.9em\' font-size=\'90\'>👨‍💻</text></svg>'">
-                        <div class="image-glow"></div>
-                    </div>
-                    <div class="hero-badge">🚀 Aprendendo Salesforce</div>
+            <div class="hero-content">
+                <div class="hero-image">
+                    <img src="https://github.com/victorbrandaao.png" alt="Victor Brandão">
                 </div>
-                
-                <div class="hero-text">
-                    <h1 class="hero-title" data-aos="fade-up" data-aos-delay="400">
-                        <span class="title-line">Olá, eu sou</span>
-                        <span class="title-name">Victor Brandão</span>
-                    </h1>
-                    
-                    <h2 class="hero-subtitle" data-aos="fade-up" data-aos-delay="600">
-                        <span class="typed-text"></span>
-                        <span class="cursor"></span>
-                    </h2>
-                    
-                    <p class="hero-description" data-aos="fade-up" data-aos-delay="800">
-                        Desenvolvedor apaixonado por tecnologia em jornada intensiva de aprendizado Salesforce. 
-                        Criando projetos reais com Apex, Lightning Web Components e integrações, 
-                        sempre focado em soluções inovadoras e experiência do usuário excepcional.
-                    </p>
-
-
-
-                    <div class="hero-cta" data-aos="fade-up" data-aos-delay="1000">
-                        <a href="#contact" class="btn btn-primary">
-                            <i class="fas fa-envelope"></i>
-                            <span>Vamos Conversar</span>
-                        </a>
-                        <a href="curriculo/index.html" class="btn btn-secondary">
-                            <i class="fas fa-file-pdf"></i>
-                            <span>Ver Currículo</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Scroll Indicator -->
-            <div class="scroll-indicator" data-aos="fade-in" data-aos-delay="1200">
-                <span class="scroll-text">Role para baixo</span>
-                <div class="scroll-arrow">
-                    <i class="fas fa-chevron-down"></i>
+                <h1>Victor Brandão</h1>
+                <h2>Salesforce Developer</h2>
+                <p>Desenvolvedor apaixonado por tecnologia, focado em Salesforce e desenvolvimento web. Criando soluções inovadoras com Apex, Lightning Web Components e tecnologias modernas.</p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">Ver Projetos</a>
+                    <a href="https://github.com/victorbrandaao" target="_blank" class="btn btn-secondary">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="section">
+    <section id="about" class="about">
         <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <span class="section-badge">Sobre Mim</span>
-                <h2 class="section-title">Desenvolvedor Salesforce em Formação</h2>
-                <p class="section-description">
-                    Em transição para me tornar um Salesforce Developer completo, combinando 
-                    minha experiência em desenvolvimento com aprendizado intensivo na plataforma Salesforce.
-                </p>
-            </div>
-
+            <h2>Sobre Mim</h2>
             <div class="about-content">
-                <div class="about-grid">
-                    <div class="glass-card" data-aos="fade-right" data-aos-delay="200">
-                        <div class="card-icon">
-                            <i class="fab fa-salesforce"></i>
-                        </div>
-                        <h3 class="card-title">Salesforce Learner</h3>
-                        <p class="card-description">
-                            Estudando intensivamente Apex, Lightning Web Components, Flow Builder e integrações. 
-                            Criando projetos reais como Event Management System e Salesforce Arc Pilot.
-                        </p>
-                        <div class="card-features">
-                            <span class="feature-tag">Apex</span>
-                            <span class="feature-tag">LWC</span>
-                            <span class="feature-tag">Flow Builder</span>
-                        </div>
-                    </div>
+                <div class="about-text">
+                    <p>Desenvolvedor em constante evolução, atualmente focado no ecossistema Salesforce. Com experiência em desenvolvimento web e backend, estou aplicando meus conhecimentos para criar soluções robustas na plataforma Salesforce.</p>
+                    
+                    <p>Minha jornada inclui projetos práticos com Apex, Lightning Web Components, integração de APIs e automação de processos. Sempre busco criar código limpo, testável e que agregue valor real aos usuários.</p>
 
-                    <div class="glass-card" data-aos="fade-left" data-aos-delay="400">
-                        <div class="card-icon">
-                            <i class="fas fa-code"></i>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <span class="stat-number">800+</span>
+                            <span class="stat-label">Usuários da extensão Arc Pilot</span>
                         </div>
-                        <h3 class="card-title">Programador Experiente</h3>
-                        <p class="card-description">
-                            Base sólida em desenvolvimento com JavaScript, C#, Node.js e criação de ferramentas. 
-                            Aplicando esses conhecimentos para acelerar meu aprendizado Salesforce.
-                        </p>
-                        <div class="card-features">
-                            <span class="feature-tag">JavaScript</span>
-                            <span class="feature-tag">C#</span>
-                            <span class="feature-tag">Node.js</span>
+                        <div class="stat-item">
+                            <span class="stat-number">10+</span>
+                            <span class="stat-label">Projetos no GitHub</span>
                         </div>
-                    </div>
-                </div>
-                
-                <div class="about-journey" data-aos="fade-up" data-aos-delay="600">
-                    <h3 class="journey-title">Minha Jornada de Aprendizado</h3>
-                    <div class="timeline">
-                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="700">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <h4>Início da Jornada Salesforce</h4>
-                                <p>Começando estudos intensivos em Salesforce Development</p>
-                                <span class="timeline-date">2023</span>
-                            </div>
-                        </div>
-                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="800">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <h4>Primeiros Projetos</h4>
-                                <p>Event Management System e ferramentas de produtividade</p>
-                                <span class="timeline-date">2024</span>
-                            </div>
-                        </div>
-                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="900">
-                            <div class="timeline-dot active"></div>
-                            <div class="timeline-content">
-                                <h4>Salesforce Arc Pilot</h4>
-                                <p>Extensão que já ajuda 800+ desenvolvedores Salesforce</p>
-                                <span class="timeline-date">Presente</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="section">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <span class="section-badge">Tecnologias</span>
-                <h2 class="section-title">Skills & Conhecimentos</h2>
-                <p class="section-description">
-                    Tecnologias que domino e estou aprendendo para me tornar um Salesforce Developer completo.
-                </p>
-            </div>
-
-            <div class="skills-content">
-                <div class="skills-categories">
-                    <div class="skill-category" data-aos="fade-up" data-aos-delay="200">
-                        <div class="category-header">
-                            <i class="fab fa-salesforce"></i>
-                            <h3>Salesforce Platform</h3>
-                        </div>
-                        <div class="skills-list">
-                            <div class="skill-item">
-                                <span class="skill-name">Apex Development</span>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">Lightning Web Components</span>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">SOQL & SOSL</span>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">Flow Builder</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="skill-category" data-aos="fade-up" data-aos-delay="400">
-                        <div class="category-header">
-                            <i class="fas fa-code"></i>
-                            <h3>Desenvolvimento</h3>
-                        </div>
-                        <div class="skills-list">
-                            <div class="skill-item">
-                                <span class="skill-name">JavaScript</span>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">C#</span>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">Node.js</span>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">HTML/CSS</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="skill-category" data-aos="fade-up" data-aos-delay="600">
-                        <div class="category-header">
-                            <i class="fas fa-tools"></i>
-                            <h3>Ferramentas & DevOps</h3>
-                        </div>
-                        <div class="skills-list">
-                            <div class="skill-item">
-                                <span class="skill-name">Git & GitHub</span>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">VS Code & SFDX</span>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">REST APIs</span>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">Testing & Debugging</span>
-                            </div>
+                        <div class="stat-item">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">Test Coverage em Apex</span>
                         </div>
                     </div>
                 </div>
@@ -330,125 +86,215 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="section">
+    <section id="projects" class="projects">
         <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <span class="section-badge">Portfolio</span>
-                <h2 class="section-title">Projetos em Destaque</h2>
-                <p class="section-description">
-                    Projetos reais que demonstram minha evolução como Salesforce Developer e programador.
-                </p>
-            </div>
+            <h2>Projetos</h2>
+            <div class="projects-grid">
+                
+                <div class="project-card featured">
+                    <div class="project-header">
+                        <i class="fas fa-rocket"></i>
+                        <h3>Salesforce Arc Pilot</h3>
+                        <span class="project-badge">Featured</span>
+                    </div>
+                    <p>Extensão para Chrome que revoluciona o workflow de desenvolvedores Salesforce. Organização inteligente de orgs, busca avançada e analytics dashboard.</p>
+                    <div class="project-tech">
+                        <span>Chrome Extension</span>
+                        <span>JavaScript</span>
+                        <span>Node.js</span>
+                        <span>Railway</span>
+                    </div>
+                    <div class="project-stats">
+                        <span><i class="fas fa-star"></i> 4.9/5 - 800+ usuários</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/victorbrandaao/SalesforceArcPilot" target="_blank">
+                            <i class="fab fa-github"></i> Código
+                        </a>
+                        <a href="https://victorbrandaao.github.io/salesforce-arc-pilot-landing" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Demo
+                        </a>
+                    </div>
+                </div>
 
-            <div class="projects-filter" data-aos="fade-up" data-aos-delay="200">
-                <button class="filter-btn active" data-filter="all">
-                    <i class="fas fa-th"></i>
-                    Todos
-                </button>
-                <button class="filter-btn" data-filter="salesforce">
-                    <i class="fab fa-salesforce"></i>
-                    Salesforce
-                </button>
-                <button class="filter-btn" data-filter="tools">
-                    <i class="fas fa-tools"></i>
-                    Ferramentas
-                </button>
-                <button class="filter-btn" data-filter="backend">
-                    <i class="fas fa-server"></i>
-                    Backend
-                </button>
-            </div>
+                <div class="project-card featured">
+                    <div class="project-header">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h3>Event Management System</h3>
+                        <span class="project-badge">Salesforce</span>
+                    </div>
+                    <p>Sistema completo de gerenciamento de eventos na plataforma Salesforce. Inclui controle de capacidade, automação de emails e Lightning Web Components.</p>
+                    <div class="project-tech">
+                        <span>Apex</span>
+                        <span>Lightning Web Components</span>
+                        <span>SOQL</span>
+                        <span>Salesforce Flow</span>
+                    </div>
+                    <div class="project-stats">
+                        <span><i class="fas fa-check-circle"></i> 100% test coverage</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/victorbrandaao/EventManagementSystem" target="_blank">
+                            <i class="fab fa-github"></i> Código
+                        </a>
+                    </div>
+                </div>
 
-            <div class="projects-grid" id="projects-grid" data-aos="fade-up" data-aos-delay="400">
-                <!-- Projects will be dynamically loaded here -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Salesforce Learning Journey</h3>
+                    </div>
+                    <p>Documentação completa da minha jornada de aprendizado Salesforce. Projetos práticos, anotações e melhores práticas.</p>
+                    <div class="project-tech">
+                        <span>Salesforce DX</span>
+                        <span>Apex</span>
+                        <span>Flow Builder</span>
+                        <span>Documentation</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/victorbrandaao/salesforce-learning-journey" target="_blank">
+                            <i class="fab fa-github"></i> Código
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <i class="fas fa-folder-open"></i>
+                        <h3>File Organizer CLI</h3>
+                    </div>
+                    <p>Ferramenta de linha de comando em C# para organização automática de arquivos. Demonstra habilidades em desenvolvimento backend.</p>
+                    <div class="project-tech">
+                        <span>C#</span>
+                        <span>.NET</span>
+                        <span>CLI</span>
+                        <span>File System</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/victorbrandaao/FileOrganizerCli" target="_blank">
+                            <i class="fab fa-github"></i> Código
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <i class="fas fa-spider"></i>
+                        <h3>Web Scraping Process</h3>
+                    </div>
+                    <p>Sistema automatizado de Web Scraping em C#. Extração inteligente de dados com tratamento de erros e processamento assíncrono.</p>
+                    <div class="project-tech">
+                        <span>C#</span>
+                        <span>Web Scraping</span>
+                        <span>HTTP Clients</span>
+                        <span>Data Processing</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/victorbrandaao/WebScrapingProcess" target="_blank">
+                            <i class="fab fa-github"></i> Código
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Instagram Follower Tracker</h3>
+                    </div>
+                    <p>Ferramenta para monitoramento da lista de seguidores do Instagram. Interface intuitiva e relatórios detalhados de crescimento.</p>
+                    <div class="project-tech">
+                        <span>C#</span>
+                        <span>Instagram API</span>
+                        <span>Data Analysis</span>
+                        <span>Windows Forms</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/victorbrandaao/InstagramFollowerTracker" target="_blank">
+                            <i class="fab fa-github"></i> Código
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="more-projects">
+                <a href="https://github.com/victorbrandaao" target="_blank" class="btn btn-outline">
+                    <i class="fab fa-github"></i> Ver todos os projetos no GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2>Tecnologias & Skills</h2>
+            <div class="skills-grid">
+                
+                <div class="skill-category">
+                    <h3><i class="fab fa-salesforce"></i> Salesforce</h3>
+                    <div class="skill-list">
+                        <span>Apex</span>
+                        <span>Lightning Web Components</span>
+                        <span>SOQL/SOSL</span>
+                        <span>Salesforce Flow</span>
+                        <span>Salesforce DX</span>
+                        <span>Lightning Design System</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3><i class="fas fa-code"></i> Desenvolvimento Web</h3>
+                    <div class="skill-list">
+                        <span>JavaScript (ES6+)</span>
+                        <span>HTML5 & CSS3</span>
+                        <span>Node.js</span>
+                        <span>REST APIs</span>
+                        <span>Chrome Extensions</span>
+                        <span>Responsive Design</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3><i class="fas fa-server"></i> Backend & Ferramentas</h3>
+                    <div class="skill-list">
+                        <span>C# & .NET</span>
+                        <span>Git & GitHub</span>
+                        <span>Railway & Deploy</span>
+                        <span>Web Scraping</span>
+                        <span>CLI Development</span>
+                        <span>Test Automation</span>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="section">
+    <section id="contact" class="contact">
         <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <span class="section-badge">Contato</span>
-                <h2 class="section-title">Vamos Trabalhar Juntos</h2>
-                <p class="section-description">
-                    Estou sempre aberto a novas oportunidades e projetos interessantes. 
-                    Entre em contato e vamos conversar!
-                </p>
-            </div>
-
-            <div class="contact-content">
-                <div class="contact-info" data-aos="fade-right" data-aos-delay="200">
-                    <div class="contact-cards-inline">
-                        <div class="contact-card">
-                            <div class="contact-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div class="contact-details">
-                                <h3>Email</h3>
-                                <p>victorbrandaotech@gmail.com</p>
-                                <a href="mailto:victorbrandaotech@gmail.com" class="contact-link">
-                                    Enviar Email
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="contact-card">
-                            <div class="contact-icon">
-                                <i class="fab fa-linkedin"></i>
-                            </div>
-                            <div class="contact-details">
-                                <h3>LinkedIn</h3>
-                                <p>Vamos nos conectar</p>
-                                <a href="https://www.linkedin.com/in/victor-brandão-dev/" target="_blank" class="contact-link">
-                                    Ver Perfil
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="contact-card">
-                            <div class="contact-icon">
-                                <i class="fab fa-github"></i>
-                            </div>
-                            <div class="contact-details">
-                                <h3>GitHub</h3>
-                                <p>Confira meus projetos</p>
-                                <a href="https://github.com/victorbrandaao" target="_blank" class="contact-link">
-                                    Ver Repositórios
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="contact-form-container" data-aos="fade-left" data-aos-delay="400">
-                    <form id="contact-form" class="contact-form">
-                        <div class="form-group">
-                            <label for="name">Nome Completo</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="subject">Assunto</label>
-                            <input type="text" id="subject" name="subject" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="message">Mensagem</label>
-                            <textarea id="message" name="message" rows="5" required></textarea>
-                        </div>
-
-                        <button type="submit" class="form-submit btn btn-primary">
-                            <i class="fas fa-paper-plane"></i>
-                            <span>Enviar Mensagem</span>
-                        </button>
-                    </form>
-                </div>
+            <h2>Vamos Conversar?</h2>
+            <p>Estou sempre aberto a novas oportunidades e projetos interessantes. Entre em contato!</p>
+            
+            <div class="contact-links">
+                <a href="https://github.com/victorbrandaao" target="_blank" class="contact-link">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <a href="https://www.linkedin.com/in/victorbrandaao" target="_blank" class="contact-link">
+                    <i class="fab fa-linkedin"></i>
+                    <span>LinkedIn</span>
+                </a>
+                <a href="mailto:victor@exemplo.com" class="contact-link">
+                    <i class="fas fa-envelope"></i>
+                    <span>Email</span>
+                </a>
+                <a href="./Victor_Brandao_Curriculo.pdf" target="_blank" class="contact-link">
+                    <i class="fas fa-file-pdf"></i>
+                    <span>Currículo</span>
+                </a>
             </div>
         </div>
     </section>
@@ -456,58 +302,10 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-left" data-aos="fade-right">
-                    <div class="footer-logo">
-                        <span class="logo-text">VB</span>
-                        <span class="logo-subtitle">Developer</span>
-                    </div>
-                    <p class="footer-description">
-                        Desenvolvedor Salesforce em formação, criando soluções inovadoras 
-                        e sempre buscando aprender novas tecnologias.
-                    </p>
-                </div>
-
-                <div class="footer-links" data-aos="fade-up" data-aos-delay="200">
-                    <h4>Links Rápidos</h4>
-                    <ul>
-                        <li><a href="#home">Início</a></li>
-                        <li><a href="#about">Sobre</a></li>
-                        <li><a href="#skills">Skills</a></li>
-                        <li><a href="#projects">Projetos</a></li>
-                        <li><a href="#contact">Contato</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-social" data-aos="fade-left" data-aos-delay="400">
-                    <h4>Conecte-se</h4>
-                    <div class="social-links">
-                        <a href="https://github.com/victorbrandaao" target="_blank" aria-label="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/in/victor-brandão-dev/" target="_blank" aria-label="LinkedIn">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="mailto:victorbrandaotech@gmail.com" aria-label="Email">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer-bottom" data-aos="fade-up" data-aos-delay="600">
-                <p>&copy; 2024 Victor Brandão. Desenvolvido com <i class="fas fa-heart"></i> e muito ☕</p>
-            </div>
+            <p>&copy; 2025 Victor Brandão. Desenvolvido com ❤️ e muito ☕</p>
         </div>
     </footer>
 
-    <!-- External Libraries -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    
-    <!-- Main JavaScript -->
-    <script src="script.js"></script>
+    <script src="script-simple.js"></script>
 </body>
 </html>

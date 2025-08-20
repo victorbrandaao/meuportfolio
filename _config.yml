@@ -1,0 +1,37 @@
+# GitHub Pages - Portfolio Victor Brandão
+
+# Force HTTPS
+enforce_ssl: victorbrandaao.github.io
+
+# Custom 404 page
+permalink: pretty
+
+# Include these files in the build
+include:
+  - "_redirects"
+  - "CNAME"
+  - "*.pdf"
+
+# Exclude these files from the build  
+exclude:
+  - "index-original.html"
+  - "style-original.css"
+  - "script-original.js"
+  - "README-simple.md"
+  - "cigarrettes-count/"
+  - "curriculo/"
+
+# Plugins
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# SEO settings
+title: "Victor Brandão - Salesforce Developer"
+description: "Portfólio de Victor Brandão, Salesforce Developer. Projetos com Apex, Lightning Web Components e desenvolvimento web."
+author: "Victor Brandão"
+lang: "pt-BR"
+
+# Social media
+github_username: victorbrandaao
+linkedin_username: victorbrandaao
