@@ -12,7 +12,7 @@ include:
   - "CNAME"
   - "*.pdf"
 
-# Exclude these files from the build  
+# Exclude these files from the build
 exclude:
   - "index-original.html"
   - "style-original.css"

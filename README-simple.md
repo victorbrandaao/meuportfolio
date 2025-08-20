@@ -21,6 +21,7 @@ Portfólio pessoal simplificado e funcional para desenvolvedor Salesforce.
 ## 📱 Responsividade
 
 O portfólio é totalmente responsivo e otimizado para:
+
 - 📱 Mobile (320px+)
 - 📱 Tablet (768px+)
 - 💻 Desktop (1024px+)
@@ -29,28 +30,34 @@ O portfólio é totalmente responsivo e otimizado para:
 ## 🎯 Seções
 
 ### 🏠 Hero
+
 - Foto do GitHub
 - Apresentação pessoal
 - Links para projetos e GitHub
 
 ### 👨‍💻 Sobre
+
 - Biografia profissional
 - Estatísticas importantes
 - Foco em Salesforce
 
 ### 🚀 Projetos
+
 Projetos destacados do GitHub:
+
 - **Salesforce Arc Pilot** - Extensão Chrome com 800+ usuários
 - **Event Management System** - Sistema Salesforce completo
 - **Salesforce Learning Journey** - Documentação do aprendizado
 - Outros projetos em C# e desenvolvimento web
 
 ### 💻 Skills
+
 - **Salesforce**: Apex, Lightning Web Components, SOQL, Salesforce Flow
 - **Web**: JavaScript, HTML5, CSS3, Node.js, REST APIs
 - **Backend**: C#, .NET, Git, Deploy, Web Scraping
 
 ### 📞 Contato
+
 - GitHub: [victorbrandaao](https://github.com/victorbrandaao)
 - LinkedIn: [victorbrandaao](https://www.linkedin.com/in/victorbrandaao)
 - Email e Currículo
@@ -70,7 +77,7 @@ Projetos destacados do GitHub:
 
 ```
 ├── index.html              # Página principal simplificada
-├── style.css              # Estilos modernos e responsivos  
+├── style.css              # Estilos modernos e responsivos
 ├── script.js              # JavaScript funcional
 ├── Victor_Brandao_Curriculo.pdf
 ├── index-original.html     # Backup da versão anterior
@@ -82,12 +89,14 @@ Projetos destacados do GitHub:
 ## ✨ Melhorias Implementadas
 
 ### 🎨 Design
+
 - ❌ Removido: Animações excessivas e loading screen
 - ❌ Removido: Partículas e efeitos complexos
 - ✅ Adicionado: Design limpo e profissional
 - ✅ Adicionado: Foco no conteúdo e projetos
 
 ### 📱 Funcionalidade
+
 - ✅ Navegação simplificada
 - ✅ Menu mobile funcional
 - ✅ Scroll suave entre seções
@@ -95,6 +104,7 @@ Projetos destacados do GitHub:
 - ✅ Links diretos para GitHub
 
 ### ⚡ Performance
+
 - 🚀 Redução de 70% no tamanho dos arquivos
 - 🚀 Carregamento instantâneo
 - 🚀 Sem dependências externas pesadas
@@ -109,13 +119,17 @@ Projetos destacados do GitHub:
 ## 📝 Projetos em Destaque
 
 ### 🚀 Salesforce Arc Pilot
+
 Extensão Chrome que revoluciona o workflow de desenvolvedores Salesforce
+
 - **800+ usuários ativos**
 - **4.9/5 estrelas de avaliação**
 - **Organização inteligente de orgs**
 
-### 🎉 Event Management System  
+### 🎉 Event Management System
+
 Sistema completo de gerenciamento de eventos em Salesforce
+
 - **100% test coverage em Apex**
 - **Lightning Web Components**
 - **Automação completa de processos**
